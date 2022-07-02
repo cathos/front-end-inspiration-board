@@ -33,7 +33,7 @@ function App() {
           <h4>Selected Board</h4>
         </section>
         <section>
-          <caption>Create Board ⁺ 𓂋 𓈒 ♡</caption>
+          <h4>Create Board ⁺ 𓂋 𓈒 ♡</h4>
           <BoardForm addBoardForm={addBoardForm} />
         </section>
         <section>

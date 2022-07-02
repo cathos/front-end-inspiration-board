@@ -7,6 +7,7 @@ const BoardForm = ({ addBoardForm }) => {
   const handleSubmit = (e) => {
     //pass the state objects to the prop
     addBoardForm([boardTitle, boardOwner]);
+    alert("Board Created!✨");
     e.preventDefault();
   };
 
