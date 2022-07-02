@@ -1,53 +1,23 @@
 import Board from "./Board.js";
 import cardDataJson from "./card.json";
-import boardDataJson from "./Boards.json";
+// import boardDataJson from "./Boards.json";
 import React from "react";
 import { useState } from "react";
 import "./App.css";
 import Card from "./Card.js";
+import BoardForm from "./BoardForm.js";
 
 function App() {
-  const [boardData, setBoardData] = useState(boardDataJson);
-  const [cardData, setCardData] = useState(cardDataJson);
+  //keep track of state of card object
+  const [cardObject, setCardData] = useState(cardDataJson);
 
-  //delete board functionality
-  const deleteBoard = (id) => {
-    const newBoardData = boardData.filter((board) => {
-      if (board.id !== id) {
-        return true;
-      } else {
-        return board;
-      }
-    });
-    //change state of boards
-    setBoardData(newBoardData);
-  };
-  const getCardJsx = (cardData) => {
-    return cardData.map((card) => {
-      return (
-        <Card
-          key={card.id}
-          id={card.id}
-          title={card.title}
-          owner={card.owner}
-          deleteCard={card.deleteCard}
-          likesCount={card.likesCount}
-        />
-      );
-    });
-  };
-  const getBoardJsx = (boardData) => {
-    return cardData.map((board) => {
-      return (
-        <Board
-          key={board.id}
-          id={board.id}
-          title={board.title}
-          owner={board.owner}
-          deleteBoard={deleteBoard}
-        />
-      );
-    });
+  //keep track of state of all BoardForms
+  const [boardForms, setBoardForms] = useState([]);
+
+  //pass this prop to BoardForm
+  const addBoardForm = (form) => {
+    let forms = [...boardForms, form];
+    setBoardForms(forms);
   };
 
   return (
@@ -57,17 +27,18 @@ function App() {
       </header>
       <div className="App">
         <section>
-          <Board />
+          <Board boards={boardForms} />
         </section>
         <section>
-          <h1>Placeholder for Selected Board Component</h1>
+          <h4>Selected Board</h4>
         </section>
         <section>
-          <h1>Placeholder for Board Form Component</h1>
+          <caption>Create Board ⁺ 𓂋 𓈒 ♡</caption>
+          <BoardForm addBoardForm={addBoardForm} />
         </section>
         <section>
           <h1>Placeholder for Cards Component</h1>
-          <Card />
+          {/* <Card cardData={cardObject} /> */}
         </section>
         <section>
           <h1>Placeholder for Cards Form Component</h1>
