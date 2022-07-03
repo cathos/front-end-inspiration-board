@@ -15,11 +15,11 @@ const BoardForm = ({ addBoardForm }) => {
 
   let formElements = [
     {
-      label: "Title",
+      label: "Title:",
       key: "title",
     },
     {
-      label: "Owner",
+      label: "Owner:",
       key: "owner",
     },
   ];

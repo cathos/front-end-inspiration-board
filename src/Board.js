@@ -2,26 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const Board = ({ boards }) => {
-  //adds form elements to dropdown in board component
-  const [board, setBoard] = useState();
-
-  //for each boards input, include in dropdown menu
+const Board = ({ boards, handleChange }) => {
   return (
     <section className="displayBoards">
       <label>☁️Boards☁️</label>
-      <select
-        className="dropdown"
-        value={board}
-        onChange={(e) => setBoard(e.target.value)}
-      >
-        {boards.map((input) => {
+      <select className="dropdown" onClick={handleChange}>
+        {boards.map((board) => {
           //got an array wanted an object error...
-          return <option>{`${input.title} By: ${input.owner}`}</option>;
+          return <option>{`Title: ${board.title} By: ${board.owner}`}</option>;
         })}
       </select>
-
-      <p>{board}</p>
+      {/* <p>{board}</p> */}
     </section>
   );
 };

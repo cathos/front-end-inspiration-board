@@ -9,11 +9,22 @@ import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
 
 function App() {
-  //keep track of state of card object
-  // const [cardObject, setCardData] = useState(cardDataJson);
-
+  //hide selected board
+  const [hidden, setHidden] = useState(true);
   //keep track of state of all BoardForms
+  //send this state to Board
   const [boardForms, setBoardForms] = useState([]);
+
+  //adds form elements to dropdown in board component
+  //send this state to SelectedBoard
+  const [selectedBoard, setSelectedBoard] = useState([]);
+
+  const handleChange = (e) => {
+    setSelectedBoard(e.target.value);
+    if (e.target.value) {
+      setHidden(false);
+    }
+  };
 
   //pass this prop to BoardForm
   const addBoardForm = (form) => {
@@ -28,11 +39,10 @@ function App() {
       </header>
       <div className="App">
         <section>
-          <Board boards={boardForms} />
+          <Board boards={boardForms} handleChange={handleChange} />
         </section>
         <section>
-          {/* <SelectedBoard /> */}
-          <h4>Selected Board</h4>
+          {!hidden ? <SelectedBoard board={selectedBoard} /> : null}
         </section>
         <section>
           <BoardForm addBoardForm={addBoardForm} />
