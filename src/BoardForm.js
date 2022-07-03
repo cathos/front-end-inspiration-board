@@ -1,58 +1,57 @@
 import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "./App.css";
 
 //BoardForm accepts prop, addBoardForm, from App.js
 const BoardForm = ({ addBoardForm }) => {
-  const handleSubmit = (e) => {
-    //pass the state objects to the prop
-    addBoardForm([boardTitle, boardOwner]);
-    alert("Board Created!✨");
+  const [formData, setFormData] = useState({});
+
+  const submit = (e) => {
     e.preventDefault();
+    addBoardForm(formData);
+    alert(JSON.stringify(formData));
   };
 
-  //keep track of states of inputs, title and owner
-  const [boardTitle, setBoardTitle] = useState();
-  const [boardOwner, setBoardOwner] = useState();
+  let formElements = [
+    {
+      label: "Title",
+      key: "title",
+    },
+    {
+      label: "Owner",
+      key: "owner",
+    },
+  ];
 
-  //return BoardForm as React Component
+  const handleChange = (value, key) => {
+    //set form data as key:value pair
+    setFormData({ ...formData, ...{ [key]: value } });
+  };
+
   return (
-    // onSubmit event listener run callback function which returns the handleSubmit
-    // function after it's passed the event, or user input, e
-    <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <label>Title</label>
-      <br />
-      <input
-        name="boardTitle"
-        type="text"
-        //event listener to update state by passing state the event target,
-        //e, which has the user's input
-        onChange={(e) => {
-          setBoardTitle(e.target.value);
-        }}
-        //value prop is corresponding state object
-        value={boardTitle}
-      />
-      <br />
-      <label>Owner</label>
-      <br />
-      <input
-        name="boardOwner"
-        type="text"
-        //event listener which updates state
-        onChange={(e) => {
-          setBoardOwner(e.target.value);
-        }}
-        //value prop is corresponding state object
-        value={boardOwner}
-      />
-      <br />
-      <input type="submit" value="Add Board❕" />
-    </form>
+    <div>
+      <form className="form">
+        Create Board ⁺ 𓂋 𓈒 ♡
+        {formElements.map((formElement) => {
+          return (
+            <div className="form-inputs">
+              {formElement.label}
+              <input
+                values={formData[formElement.key]}
+                onChange={(e) => {
+                  e.preventDefault();
+                  handleChange(e.target.value, formElement.key);
+                }}
+              />
+            </div>
+          );
+        })}
+        <button className="form-button" onClick={submit}>
+          Add Board
+        </button>
+      </form>
+    </div>
   );
 };
 export default BoardForm;

@@ -6,10 +6,11 @@ import { useState } from "react";
 import "./App.css";
 import Card from "./Card.js";
 import BoardForm from "./BoardForm.js";
+import SelectedBoard from "./SelectedBoard.js";
 
 function App() {
   //keep track of state of card object
-  const [cardObject, setCardData] = useState(cardDataJson);
+  // const [cardObject, setCardData] = useState(cardDataJson);
 
   //keep track of state of all BoardForms
   const [boardForms, setBoardForms] = useState([]);
@@ -30,18 +31,18 @@ function App() {
           <Board boards={boardForms} />
         </section>
         <section>
+          {/* <SelectedBoard /> */}
           <h4>Selected Board</h4>
         </section>
         <section>
-          <h4>Create Board ⁺ 𓂋 𓈒 ♡</h4>
           <BoardForm addBoardForm={addBoardForm} />
         </section>
         <section>
-          <h1>Placeholder for Cards Component</h1>
+          <h4>Cards Component</h4>
           {/* <Card cardData={cardObject} /> */}
         </section>
         <section>
-          <h1>Placeholder for Cards Form Component</h1>
+          <h4>Cards Form Component</h4>
         </section>
       </div>
     </div>

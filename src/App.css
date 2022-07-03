@@ -15,3 +15,41 @@
     color: white;
     font-family: cursive;
 }
+
+/*BoardForm*/
+.form-inputs{
+    margin: 50px;
+}
+
+.form{
+    border: solid .5px lavender;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.form-button {
+    margin-left: 150px;
+    margin-bottom: 30px;
+    color: rgba(201, 118, 216, 0.777);
+    border:0;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+/*Dropdown*/
+.dropdown {
+    width:100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    background:white;
+    box-sizing: border-box;
+}
+
+.displayBoards {
+    border: solid .5px lavender;
+    margin-top: 10px;
+    padding: 30px;
+}
