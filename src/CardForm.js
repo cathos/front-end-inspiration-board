@@ -3,9 +3,10 @@ import { useState } from "react";
 import "./App.css";
 
 const CardForm = ({ addCardForm }) => {
+  //state of cardForm
   const [cardData, setFormData] = useState({});
 
-  const submit = (e) => {
+  const cardFormSubmit = (e) => {
     e.preventDefault();
     addCardForm(cardData);
     alert(JSON.stringify(cardData));
@@ -18,7 +19,7 @@ const CardForm = ({ addCardForm }) => {
     },
   ];
 
-  const handleChange = (value, key) => {
+  const handleCardFormChange = (value, key) => {
     //set form data as key:value pair
     setFormData({ ...cardData, ...{ [key]: value } });
   };
@@ -35,13 +36,13 @@ const CardForm = ({ addCardForm }) => {
                 values={cardData[formElement.key]}
                 onChange={(e) => {
                   e.preventDefault();
-                  handleChange(e.target.value, formElement.key);
+                  handleCardFormChange(e.target.value, formElement.key);
                 }}
               />
             </div>
           );
         })}
-        <button className="form-button" onClick={submit}>
+        <button className="form-button" onClick={cardFormSubmit}>
           Add Card
         </button>
       </form>
