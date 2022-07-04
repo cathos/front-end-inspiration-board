@@ -6,7 +6,11 @@ const SelectedBoard = ({ board }) => {
     <section className="form">
       <h4>Selected Board</h4>
       {board}
-      <button className="form-button">Remove Board</button>
+      <br />
+      <div className="board-buttons">
+        <button className="form-button">Remove Board</button>
+        <button className="form-button">Add Cards</button>
+      </div>
     </section>
   );
 };

@@ -1,44 +1,38 @@
 import React from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import "./App.css";
 
-//BoardForm accepts prop, addBoardForm, from App.js
-const BoardForm = ({ addBoardForm }) => {
-  const [formData, setFormData] = useState({});
+const CardForm = ({ addCardForm }) => {
+  const [cardData, setFormData] = useState({});
 
   const submit = (e) => {
     e.preventDefault();
-    addBoardForm(formData);
-    alert(JSON.stringify(formData));
+    addCardForm(cardData);
+    alert(JSON.stringify(cardData));
   };
 
   let formElements = [
     {
-      label: "Title:",
-      key: "title",
-    },
-    {
-      label: "Owner:",
-      key: "owner",
+      label: "Note:",
+      key: "message",
     },
   ];
 
   const handleChange = (value, key) => {
     //set form data as key:value pair
-    setFormData({ ...formData, ...{ [key]: value } });
+    setFormData({ ...cardData, ...{ [key]: value } });
   };
 
   return (
     <div>
       <form className="form">
-        ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
+        ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
         {formElements.map((formElement) => {
           return (
             <div className="form-inputs">
               {formElement.label}
               <input
-                values={formData[formElement.key]}
+                values={cardData[formElement.key]}
                 onChange={(e) => {
                   e.preventDefault();
                   handleChange(e.target.value, formElement.key);
@@ -48,10 +42,11 @@ const BoardForm = ({ addBoardForm }) => {
           );
         })}
         <button className="form-button" onClick={submit}>
-          Add Board
+          Add Card
         </button>
       </form>
     </div>
   );
 };
-export default BoardForm;
+
+export default CardForm;

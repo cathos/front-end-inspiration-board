@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
 const Board = ({ boards, handleChange }) => {
   return (
@@ -12,7 +11,6 @@ const Board = ({ boards, handleChange }) => {
           return <option>{`Title: ${board.title} By: ${board.owner}`}</option>;
         })}
       </select>
-      {/* <p>{board}</p> */}
     </section>
   );
 };
