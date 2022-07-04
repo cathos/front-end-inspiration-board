@@ -1,7 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import "./App.css";
+
+//API CONSIDERATIONS
+
+//user fills out form and calls API POST onSubmit
+//API POST gives form id and persists and sends data back to frontend
+//frontend renders data without id visible
+//frontend only uses boardform id to delete board and add cards to it
 
 //BoardForm accepts prop, addBoardForm, from App.js
 const BoardForm = ({ addBoardForm }) => {

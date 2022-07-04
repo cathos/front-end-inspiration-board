@@ -8,34 +8,44 @@ import SelectedBoard from "./SelectedBoard.js";
 import CardForm from "./CardForm.js";
 
 function App() {
-  const ACTIONS = {
+  const LIKE_ACTIONS = {
     INCREMENT: "increment",
     DECREMENT: "decrement",
   };
+
+  const BOARD_ACTIONS = {
+    DELETE_BOARD: "deleteBoard",
+    ADD_CARD: "addCard",
+  };
+
   //userReducer function to increment and decrement likesCount
-  const reducer = (likesState, action) => {
+  const likesReducer = (likesState, action) => {
     switch (action.type) {
-      case ACTIONS.INCREMENT:
+      case LIKE_ACTIONS.INCREMENT:
         return { count: likesState.count + 1 };
-      case ACTIONS.DECREMENT:
+      case LIKE_ACTIONS.DECREMENT:
         return { count: likesState.count - 1 };
       default:
         return likesState;
     }
   };
   //increment and decrement likesCount
-  const [likesState, dispatch] = useReducer(reducer, { count: 0 });
+  const [likesState, dispatch] = useReducer(likesReducer, { count: 0 });
   //function to increment likesCount
   const increment = () => {
-    dispatch({ type: ACTIONS.INCREMENT });
+    dispatch({ type: LIKE_ACTIONS.INCREMENT });
   };
   //function to decrement likesCount
   const decrement = () => {
-    dispatch({ type: ACTIONS.DECREMENT });
+    dispatch({ type: LIKE_ACTIONS.DECREMENT });
   };
 
   //hide selected board
   const [selectedHidden, setSelectedHidden] = useState(true);
+  //hide CardForm
+  const [cardFormHidden, setCardFormHidden] = useState(true);
+  //hide Card
+  const [cardHidden, setCardHidden] = useState(true);
 
   const [boardForms, setBoardForms] = useState([]);
 
@@ -66,31 +76,71 @@ function App() {
     setCardForms(forms);
   };
 
+  //Board actions with useReducer
+  //selectedBooards actions
+  //delete board
+  //add card
+  const boardReducer = (selectedBoardState, action) => {
+    switch (action.type) {
+      case BOARD_ACTIONS.ADD_CARD:
+        return setCardFormHidden(false);
+      case BOARD_ACTIONS.DELETE_BOARD:
+        return boardForms.filter((form) => form.id !== action.payload.id);
+      default:
+        return selectedBoardState;
+    }
+  };
+  const [selectedBoardState, selectedBoardDispatch] = useReducer(
+    boardReducer,
+    []
+  );
+  const deleteBoard = () => {
+    selectedBoardDispatch({ type: BOARD_ACTIONS.DELETE_BOARD });
+  };
+
+  const addCard = () => {
+    selectedBoardDispatch({ type: BOARD_ACTIONS.ADD_CARD });
+  };
+
   return (
     <div>
       <header className="Header">
         <h1>♥*♡∞:｡.｡ InspoBoard ｡.｡:∞♡*♥</h1>
+        <br />
+        <button>Ψ ♥* Dark Mode .｡:†</button>
       </header>
+
       <div className="App">
         <section>
           <Board boards={boardForms} handleChange={boardChange} />
         </section>
         <section>
-          {!selectedHidden ? <SelectedBoard board={selectedBoard} /> : null}
+          {!selectedHidden ? (
+            <SelectedBoard
+              board={selectedBoard}
+              selectedBoardState={selectedBoardState}
+              deleteBoard={deleteBoard}
+              addCard={addCard}
+            />
+          ) : null}
         </section>
         <section>
           <BoardForm addBoardForm={addBoardForm} />
         </section>
         <section>
-          <Card
-            cards={cardForms}
-            increment={increment}
-            decrement={decrement}
-            likesState={likesState}
-          />
+          {!cardHidden ? (
+            <Card
+              cards={cardForms}
+              increment={increment}
+              decrement={decrement}
+              likesState={likesState}
+            />
+          ) : null}
         </section>
         <section>
-          <CardForm addCardForm={addCardForm} />
+          {!cardFormHidden ? (
+            <CardForm addCardForm={addCardForm} setCardHidden={setCardHidden} />
+          ) : null}
         </section>
       </div>
     </div>
