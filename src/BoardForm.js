@@ -1,24 +1,13 @@
 import React from "react";
-import { useState } from "react";
+
 import "./App.css";
 
-//API CONSIDERATIONS
-
-//user fills out form and calls API POST onSubmit
-//API POST gives form id and persists and sends data back to frontend
-//frontend renders data without id visible
-//frontend only uses boardform id to delete board and add cards to it
-
-//BoardForm accepts prop, addBoardForm, from App.js
-const BoardForm = ({ addBoardForm }) => {
-  const [formData, setFormData] = useState({});
-
-  const submit = (e) => {
-    e.preventDefault();
-    addBoardForm(formData);
-    alert(JSON.stringify(formData));
-  };
-
+const BoardForm = ({
+  setBoards,
+  handleBoardsFormChange,
+  formData,
+  handleBoardFormSubmit,
+}) => {
   let formElements = [
     {
       label: "Title:",
@@ -29,11 +18,6 @@ const BoardForm = ({ addBoardForm }) => {
       key: "owner",
     },
   ];
-
-  const handleChange = (value, key) => {
-    //set form data as key:value pair
-    setFormData({ ...formData, ...{ [key]: value } });
-  };
 
   return (
     <div>
@@ -47,13 +31,13 @@ const BoardForm = ({ addBoardForm }) => {
                 values={formData[formElement.key]}
                 onChange={(e) => {
                   e.preventDefault();
-                  handleChange(e.target.value, formElement.key);
+                  handleBoardsFormChange(e.target.value, formElement.key);
                 }}
               />
             </div>
           );
         })}
-        <button className="form-button" onClick={submit}>
+        <button className="form-button" onClick={handleBoardFormSubmit}>
           Add Board
         </button>
       </form>

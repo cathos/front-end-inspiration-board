@@ -1,13 +1,51 @@
 import Board from "./Board.js";
 import React from "react";
-import { useState, useReducer } from "react";
+import { useState, useReducer, useEffect } from "react";
 import "./App.css";
 import Card from "./Card.js";
 import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
 import CardForm from "./CardForm.js";
+import axios from "axios";
 
 function App() {
+  //Get boards
+  const [boards, setBoards] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://orange-purple-inspo-board.herokuapp.com/boards")
+      .then(function (response) {
+        response = response.data;
+        setBoards(response).catch(function (err) {
+          console.log("Someting Went Wrong");
+        });
+      });
+  }, [boards]);
+
+  //set FormData in BoardForm
+  const [formData, setFormData] = useState({});
+
+  //handle boards change given BoardForm data
+  const handleBoardsFormChange = (value, key) => {
+    //set form data as key:value pair
+    setFormData({ ...formData, ...{ [key]: value } });
+  };
+
+  //handle BoardForm Submit
+  const handleBoardFormSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://orange-purple-inspo-board.herokuapp.com/boards/id", {
+        title: formData.title,
+        owner: formData.owner,
+      })
+      .then((response) => {
+        response = response.data;
+        setBoards(formData);
+      });
+  };
+
+  //like actions
   const LIKE_ACTIONS = {
     INCREMENT: "increment",
     DECREMENT: "decrement",
@@ -47,7 +85,7 @@ function App() {
   //hide Card
   const [cardHidden, setCardHidden] = useState(true);
 
-  const [boardForms, setBoardForms] = useState([]);
+  // const [boardForms, setBoardForms] = useState([]);
 
   //update cardForm state and send to card to display
   const [cardForms, setCardForms] = useState([]);
@@ -65,10 +103,10 @@ function App() {
   };
 
   //update boardForm state to pass to board
-  const addBoardForm = (form) => {
-    let forms = [...boardForms, form];
-    setBoardForms(forms);
-  };
+  // const addBoardForm = (form) => {
+  //   let forms = [...boardForms, form];
+  //   setBoardForms(forms);
+  // };
 
   //update cardForm state to pass to Card
   const addCardForm = (form) => {
@@ -85,7 +123,7 @@ function App() {
       case BOARD_ACTIONS.ADD_CARD:
         return setCardFormHidden(false);
       case BOARD_ACTIONS.DELETE_BOARD:
-        return boardForms.filter((form) => form.id !== action.payload.id);
+        return boards.filter((form) => form.id !== action.payload.id);
       default:
         return selectedBoardState;
     }
@@ -112,7 +150,7 @@ function App() {
 
       <div className="App">
         <section>
-          <Board boards={boardForms} handleChange={boardChange} />
+          <Board boards={boards} handleChange={boardChange} />
         </section>
         <section>
           {!selectedHidden ? (
@@ -125,7 +163,12 @@ function App() {
           ) : null}
         </section>
         <section>
-          <BoardForm addBoardForm={addBoardForm} />
+          <BoardForm
+            setBoards={setBoards}
+            handleBoardsFormChange={handleBoardsFormChange}
+            formData={formData}
+            handleBoardFormSubmit={handleBoardFormSubmit}
+          />
         </section>
         <section>
           {!cardHidden ? (
