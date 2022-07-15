@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-// import AsyncSelect from "react-select/async";
 
-const Board = ({
-  handleChange,
-  getBoards,
-  options,
-  prompt,
-  value,
-  onChange,
-}) => {
+const Board = ({ options, prompt, value, onChange }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="dropdown">

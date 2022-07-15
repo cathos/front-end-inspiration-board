@@ -10,57 +10,40 @@ import CardForm from "./CardForm.js";
 import axios from "axios";
 
 function App() {
+  //setTitle & setOwner for boards
+  const [title, setTitle] = useState("");
+  const [owner, setOwner] = useState("");
+
   //boards state
   const [boards, setBoards] = useState([]);
 
   //value
   const [value, setValue] = useState(null);
 
-  //Get boards
+  //GET request boards
 
-  const getBoards = () => {
-    return axios
-      .get("https://orange-purple-inspo-board.herokuapp.com/boards")
-      .then(function (response) {
-        response = response.data;
-        // const newBoards = response.data.map((board) => {
-        //   return {
-        //     id: board.id,
-        //     title: board.title,
-        //     owner: board.owner,
-        //   };
-        // });
-        console.log(response);
-        setBoards(response).catch(function (err) {
-          console.log(`Someting Went Wrong: ${err}`);
-        });
-      });
+  const getBoards = async () => {
+    const response = await axios.get(
+      "https://orange-purple-inspo-board.herokuapp.com/boards"
+    );
+    setBoards(response.data);
   };
 
   useEffect(() => {
     getBoards();
   }, []);
 
-  //set FormData in BoardForm
-  const [formData, setFormData] = useState({});
-
-  //handle boards change given BoardForm data
-  const handleBoardsFormChange = (value, key) => {
-    //set form data as key:value pair
-    setFormData({ ...formData, ...{ [key]: value } });
-  };
-
-  //handle BoardForm Submit
+  //POST request handle BoardForm Submit
   const handleBoardFormSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("https://orange-purple-inspo-board.herokuapp.com/boards/id", {
-        title: formData.title,
-        owner: formData.owner,
+    return axios
+      .post("https://orange-purple-inspo-board.herokuapp.com/boards", {
+        title,
+        owner,
       })
       .then((response) => {
         response = response.data;
-        setBoards(formData);
+        setBoards({ ...boards, response });
       });
   };
 
@@ -189,9 +172,11 @@ function App() {
         </section>
         <section>
           <BoardForm
-            handleBoardsFormChange={handleBoardsFormChange}
-            formData={formData}
             handleBoardFormSubmit={handleBoardFormSubmit}
+            setTitle={setTitle}
+            setOwner={setOwner}
+            title={title}
+            owner={owner}
           />
         </section>
         <section>
