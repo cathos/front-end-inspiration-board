@@ -2,6 +2,7 @@ import Board from "./Board.js";
 import React from "react";
 import { useState, useReducer, useEffect } from "react";
 import "./App.css";
+import "./dropdown.css";
 import Card from "./Card.js";
 import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
@@ -9,18 +10,36 @@ import CardForm from "./CardForm.js";
 import axios from "axios";
 
 function App() {
-  //Get boards
+  //boards state
   const [boards, setBoards] = useState([]);
-  useEffect(() => {
-    axios
+
+  //value
+  const [value, setValue] = useState(null);
+
+  //Get boards
+
+  const getBoards = () => {
+    return axios
       .get("https://orange-purple-inspo-board.herokuapp.com/boards")
       .then(function (response) {
         response = response.data;
+        // const newBoards = response.data.map((board) => {
+        //   return {
+        //     id: board.id,
+        //     title: board.title,
+        //     owner: board.owner,
+        //   };
+        // });
+        console.log(response);
         setBoards(response).catch(function (err) {
-          console.log("Someting Went Wrong");
+          console.log(`Someting Went Wrong: ${err}`);
         });
       });
-  }, [boards]);
+  };
+
+  useEffect(() => {
+    getBoards();
+  }, []);
 
   //set FormData in BoardForm
   const [formData, setFormData] = useState({});
@@ -150,7 +169,13 @@ function App() {
 
       <div className="App">
         <section>
-          <Board boards={boards} handleChange={boardChange} />
+          <Board
+            handleChange={boardChange}
+            options={boards}
+            prompt="Select Board"
+            value={value}
+            onChange={(value) => setValue(value)}
+          />
         </section>
         <section>
           {!selectedHidden ? (
@@ -164,7 +189,6 @@ function App() {
         </section>
         <section>
           <BoardForm
-            setBoards={setBoards}
             handleBoardsFormChange={handleBoardsFormChange}
             formData={formData}
             handleBoardFormSubmit={handleBoardFormSubmit}

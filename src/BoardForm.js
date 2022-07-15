@@ -3,7 +3,6 @@ import React from "react";
 import "./App.css";
 
 const BoardForm = ({
-  setBoards,
   handleBoardsFormChange,
   formData,
   handleBoardFormSubmit,
