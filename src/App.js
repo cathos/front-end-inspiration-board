@@ -10,9 +10,18 @@ import CardForm from "./CardForm.js";
 import axios from "axios";
 
 function App() {
-  //setTitle & setOwner for boards
-  const [title, setTitle] = useState("");
-  const [owner, setOwner] = useState("");
+  //submit forms
+  const addBoardData = (newBoard) => {
+    const newBoardData = [...boards];
+    const nextId = Math.max(...newBoardData.map((board) => board.id)) + 1;
+
+    newBoardData.push({
+      id: nextId,
+      title: newBoard.title,
+      owner: newBoard.owner,
+    });
+    setBoards(newBoardData);
+  };
 
   //boards state
   const [boards, setBoards] = useState([]);
@@ -21,7 +30,6 @@ function App() {
   const [value, setValue] = useState(null);
 
   //GET request boards
-
   const getBoards = async () => {
     const response = await axios.get(
       "https://orange-purple-inspo-board.herokuapp.com/boards"
@@ -32,20 +40,6 @@ function App() {
   useEffect(() => {
     getBoards();
   }, []);
-
-  //POST request handle BoardForm Submit
-  const handleBoardFormSubmit = (e) => {
-    e.preventDefault();
-    return axios
-      .post("https://orange-purple-inspo-board.herokuapp.com/boards", {
-        title,
-        owner,
-      })
-      .then((response) => {
-        response = response.data;
-        setBoards({ ...boards, response });
-      });
-  };
 
   //like actions
   const LIKE_ACTIONS = {
@@ -171,13 +165,7 @@ function App() {
           ) : null}
         </section>
         <section>
-          <BoardForm
-            handleBoardFormSubmit={handleBoardFormSubmit}
-            setTitle={setTitle}
-            setOwner={setOwner}
-            title={title}
-            owner={owner}
-          />
+          <BoardForm addBoardData={addBoardData} />
         </section>
         <section>
           {!cardHidden ? (

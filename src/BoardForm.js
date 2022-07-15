@@ -1,37 +1,78 @@
 import "./App.css";
+import React, { useState } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+const BoardForm = ({ addBoardData }) => {
+  const [boardFormData, setBoardFormData] = useState({
+    title: "",
+    owner: "",
+  });
 
-const BoardForm = ({
-  setTitle,
-  setOwner,
-  title,
-  owner,
-  handleBoardFormSubmit,
-}) => {
+  const onTitleChange = (e) => {
+    setBoardFormData({
+      ...boardFormData,
+      title: e.target.value,
+    });
+  };
+
+  const onOwnerChange = (e) => {
+    setBoardFormData({
+      ...boardFormData,
+      owner: e.target.value,
+    });
+  };
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+
+    addBoardData({
+      title: boardFormData.title,
+      owner: boardFormData.owner,
+    });
+    setBoardFormData({
+      title: "",
+      owner: "",
+    });
+    postBoard();
+  };
+
+  const postBoard = () => {
+    return axios.post(
+      "https://orange-purple-inspo-board.herokuapp.com/boards",
+      {
+        title: boardFormData.title,
+        owner: boardFormData.owner,
+      }
+    );
+  };
+
   return (
     <div>
       <section className="form">
         ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
-        <form>
+        <form onSubmit={onFormSubmit}>
           <label>Title</label>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={boardFormData.title}
+            onChange={onTitleChange}
           />
           <hr />
           <label>Owner</label>
           <input
             type="text"
-            value={owner}
-            onChange={(e) => setOwner(e.target.value)}
+            value={boardFormData.owner}
+            onChange={onOwnerChange}
           />
           <hr />
-          <button className="form-button" onClick={handleBoardFormSubmit}>
-            Add Board
-          </button>
+          <input type="submit" value="Add Board" className="form-button" />
         </form>
       </section>
     </div>
   );
+};
+
+BoardForm.propTypes = {
+  addBoardData: PropTypes.func.isRequired,
 };
 export default BoardForm;
