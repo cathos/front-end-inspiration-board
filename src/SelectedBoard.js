@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-//API CONSIDERATIONS
-
-//user selects a Board from the dropdown which uses API READS and POSTS to render it to the SelectedBoard Component
-//SelectedBoard component READS the cards associatd with board and reads the board
-//SelectedBoard and Board have the same id
-//id is not rendered
-//id is used to deleteBoard and associated cards and to addCards
+import axios from "axios";
 
 const SelectedBoard = ({ board, deleteBoard, addCard }) => {
   const removeBoard = () => {
     deleteBoard();
   };
-
+  // console.log(`board data: ${board}`);
   const newCard = () => {
     addCard();
   };
@@ -20,7 +14,8 @@ const SelectedBoard = ({ board, deleteBoard, addCard }) => {
   return (
     <section className="form">
       <h4>Selected Board</h4>
-      {board}
+      <div>{`Title: ${board.title} By: ${board.owner}`}</div>
+
       <br />
       <div className="board-buttons">
         <button className="form-button">Remove Board</button>
@@ -32,9 +27,9 @@ const SelectedBoard = ({ board, deleteBoard, addCard }) => {
   );
 };
 
-SelectedBoard.propTypes = {
-  title: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
-};
+// SelectedBoard.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   owner: PropTypes.string.isRequired,
+// };
 
 export default SelectedBoard;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const Board = ({ options, prompt, value, onChange }) => {
+const Board = ({ options, prompt, value, onChange, getSelectedBoard }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="dropdown">
@@ -11,10 +11,12 @@ const Board = ({ options, prompt, value, onChange }) => {
         <div className={`options ${open ? "open" : null}`}>
           {options.map((option) => (
             <div
+              key={option.id}
               className={`${value === option} ? "selected" : null}`}
               onClick={() => {
                 onChange(option);
                 setOpen(false);
+                getSelectedBoard(option.id);
               }}
             >
               Title: {option.title} By: {option.owner}

@@ -10,6 +10,14 @@ import CardForm from "./CardForm.js";
 import axios from "axios";
 
 function App() {
+  //setSelected Board by id
+  const getSelectedBoard = async (id) => {
+    const resp = await axios.get(
+      `https://orange-purple-inspo-board.herokuapp.com/boards/${id}`
+    );
+    setSelectedBoard(resp.data.board);
+  };
+
   //submit forms
   const addBoardData = (newBoard) => {
     const newBoardData = [...boards];
@@ -75,7 +83,7 @@ function App() {
   };
 
   //hide selected board
-  const [selectedHidden, setSelectedHidden] = useState(true);
+  // const [selectedHidden, setSelectedHidden] = useState(true);
   //hide CardForm
   const [cardFormHidden, setCardFormHidden] = useState(true);
   //hide Card
@@ -94,7 +102,7 @@ function App() {
   const boardChange = (e) => {
     setSelectedBoard(e.target.value);
     if (e.target.value) {
-      setSelectedHidden(false);
+      // setSelectedHidden(false);
     }
   };
 
@@ -147,6 +155,7 @@ function App() {
       <div className="App">
         <section>
           <Board
+            getSelectedBoard={getSelectedBoard}
             handleChange={boardChange}
             options={boards}
             prompt="Select Board"
@@ -155,14 +164,13 @@ function App() {
           />
         </section>
         <section>
-          {!selectedHidden ? (
-            <SelectedBoard
-              board={selectedBoard}
-              selectedBoardState={selectedBoardState}
-              deleteBoard={deleteBoard}
-              addCard={addCard}
-            />
-          ) : null}
+          <SelectedBoard
+            setSelectedBoard={setSelectedBoard}
+            board={selectedBoard}
+            selectedBoardState={selectedBoardState}
+            deleteBoard={deleteBoard}
+            addCard={addCard}
+          />
         </section>
         <section>
           <BoardForm addBoardData={addBoardData} />
