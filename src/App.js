@@ -31,8 +31,22 @@ function App() {
     setBoards(newBoardData);
   };
 
+  //submit card forms
+  const addCardData = (newCard) => {
+    const newCardData = [...cards];
+    const nextId = Math.max(...newCardData.map((card) => card.id)) + 1;
+
+    newCardData.push({
+      id: nextId,
+      message: newCard.message,
+    });
+    setCards(newCardData);
+  };
   //boards state
   const [boards, setBoards] = useState([]);
+
+  //card state
+  const [cards, setCards] = useState([]);
 
   //value
   const [value, setValue] = useState(null);
@@ -85,9 +99,9 @@ function App() {
   //hide selected board
   // const [selectedHidden, setSelectedHidden] = useState(true);
   //hide CardForm
-  const [cardFormHidden, setCardFormHidden] = useState(true);
+  // const [cardFormHidden, setCardFormHidden] = useState(true);
   //hide Card
-  const [cardHidden, setCardHidden] = useState(true);
+  // const [cardHidden, setCardHidden] = useState(true);
 
   // const [boardForms, setBoardForms] = useState([]);
 
@@ -96,7 +110,10 @@ function App() {
 
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
-  const [selectedBoard, setSelectedBoard] = useState([]);
+  const [selectedBoard, setSelectedBoard] = useState({
+    title: "",
+    owner: "",
+  });
 
   //updates selectedBoard state & adds selectedBoard to SelectedBoard component onClick
   const boardChange = (e) => {
@@ -113,10 +130,10 @@ function App() {
   // };
 
   //update cardForm state to pass to Card
-  const addCardForm = (form) => {
-    let forms = [...cardForms, form];
-    setCardForms(forms);
-  };
+  // const addCardForm = (form) => {
+  //   let forms = [...cardForms, form];
+  //   setCardForms(forms);
+  // };
 
   //Board actions with useReducer
   //selectedBooards actions
@@ -124,8 +141,8 @@ function App() {
   //add card
   const boardReducer = (selectedBoardState, action) => {
     switch (action.type) {
-      case BOARD_ACTIONS.ADD_CARD:
-        return setCardFormHidden(false);
+      // case BOARD_ACTIONS.ADD_CARD:
+      // return setCardFormHidden(false);
       case BOARD_ACTIONS.DELETE_BOARD:
         return boards.filter((form) => form.id !== action.payload.id);
       default:
@@ -176,19 +193,15 @@ function App() {
           <BoardForm addBoardData={addBoardData} />
         </section>
         <section>
-          {!cardHidden ? (
-            <Card
-              cards={cardForms}
-              increment={increment}
-              decrement={decrement}
-              likesState={likesState}
-            />
-          ) : null}
+          <Card
+            cards={cardForms}
+            increment={increment}
+            decrement={decrement}
+            likesState={likesState}
+          />
         </section>
         <section>
-          {!cardFormHidden ? (
-            <CardForm addCardForm={addCardForm} setCardHidden={setCardHidden} />
-          ) : null}
+          <CardForm addCardData={addCardData} boards={boards} />
         </section>
       </div>
     </div>

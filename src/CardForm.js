@@ -1,60 +1,57 @@
 import React from "react";
 import { useState } from "react";
 import "./App.css";
+import axios from "axios";
 
-//API CONSIDERATIONS
-
-//user clicks addCard on SelectedBoard which has the same id as board/BoardForm
-//user fills out CardForm which calls API POST to post card
-//API POST associates Card id with CardForm id which is associated with the Board/BoardForm id
-//card id does not get rendered
-//card id is only used for card actions: toggleLikes, deletecard
-
-const CardForm = ({ addCardForm, setCardHidden }) => {
+const CardForm = ({ addCardData, boards }) => {
   //state of cardForm
-  const [cardData, setFormData] = useState({});
+  const [cardFormData, setCardFormData] = useState({
+    message: "",
+  });
 
-  const cardFormSubmit = (e) => {
-    e.preventDefault();
-    addCardForm(cardData);
-    setCardHidden(false);
-    alert(JSON.stringify(cardData));
+  const onMessageChange = (e) => {
+    setCardFormData({
+      ...cardFormData,
+      title: e.target.value,
+    });
   };
 
-  let formElements = [
-    {
-      label: "Note:",
-      key: "message",
-    },
-  ];
+  const onFormSubmit = (e, id) => {
+    e.preventDefault();
 
-  const handleCardFormChange = (value, key) => {
-    //set form data as key:value pair
-    setFormData({ ...cardData, ...{ [key]: value } });
+    addCardData({
+      message: cardFormData.message,
+    });
+    setCardFormData({
+      message: "",
+    });
+    postCard(id);
+  };
+
+  const postCard = (id) => {
+    return axios.post(
+      `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`,
+      {
+        message: cardFormData.message,
+      }
+    );
   };
 
   return (
-    <div className="form">
-      <form>
+    <div>
+      <section className="form">
         ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
-        {formElements.map((formElement) => {
-          return (
-            <div className="form-inputs">
-              {formElement.label}
-              <input
-                values={cardData[formElement.key]}
-                onChange={(e) => {
-                  e.preventDefault();
-                  handleCardFormChange(e.target.value, formElement.key);
-                }}
-              />
-            </div>
-          );
-        })}
-        <button className="form-button" onClick={cardFormSubmit}>
-          Add Card
-        </button>
-      </form>
+        <form onSubmit={onFormSubmit}>
+          <label>Title</label>
+          <input
+            type="text"
+            value={cardFormData.message}
+            onChange={onMessageChange}
+          />
+          <hr />
+          <input type="submit" value="Add Card" className="form-button" />
+        </form>
+      </section>
     </div>
   );
 };

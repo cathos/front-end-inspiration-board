@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 const Card = ({ cards, increment, decrement, likesState }) => {
+  const [boardCards, setBoardCards] = useState({
+    message: "",
+  });
+  const getCards = async (id) => {
+    const response = await axios.get(
+      `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`
+    );
+    setBoardCards(response.data);
+  };
+
   //increment or decrement likes and display
   const displayLikes = () => {
     if (likesState.count < 1) {
@@ -12,6 +23,7 @@ const Card = ({ cards, increment, decrement, likesState }) => {
   return (
     <section className="form">
       <div>
+        Cards
         {cards.map((card) => {
           return (
             <div>
