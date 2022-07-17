@@ -8,8 +8,17 @@ import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
 import CardForm from "./CardForm.js";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import About from "./Pages/about";
+import BoardsPage from "./Pages/boards";
+import Home from "./Pages/home";
+import CardsPage from "./Pages/cards";
+import Header from "./Components/Header";
+import "./Styles/header.css";
+import NotFound from "./Pages/NotFound";
 function App() {
+  //react router v6
+
   //setSelected Board by id
   const getSelectedBoard = async (id) => {
     const resp = await axios.get(
@@ -124,18 +133,6 @@ function App() {
     }
   };
 
-  //update boardForm state to pass to board
-  // const addBoardForm = (form) => {
-  //   let forms = [...boardForms, form];
-  //   setBoardForms(forms);
-  // };
-
-  //update cardForm state to pass to Card
-  // const addCardForm = (form) => {
-  //   let forms = [...cardForms, form];
-  //   setCardForms(forms);
-  // };
-
   //Board actions with useReducer
   //selectedBooards actions
   //delete board
@@ -163,54 +160,77 @@ function App() {
   };
 
   return (
-    <div>
-      <header className="Header">
-        <h1>♥*♡∞:｡.｡ InspoBoard ｡.｡:∞♡*♥</h1>
-        <br />
-        <button>Ψ ♥* Dark Mode .｡:†</button>
-      </header>
+    // <BrowserRouter>
+    /* <div>
+        <header className="Header">
+          <h1>♥*♡∞:｡.｡ InspoBoard ｡.｡:∞♡*♥</h1>
+          <br />
+          <button>Ψ ♥* Dark Mode .｡:†</button>
+        </header>
 
-      <div className="App">
-        <section>
-          <Board
-            getSelectedBoard={getSelectedBoard}
-            handleChange={boardChange}
-            options={boards}
-            prompt="Select Board"
-            value={value}
-            onChange={(value) => setValue(value)}
-          />
-        </section>
-        <section>
-          <SelectedBoard
-            setSelectedBoard={setSelectedBoard}
-            board={selectedBoard}
-            selectedBoardState={selectedBoardState}
-            deleteBoard={deleteBoard}
-            addCard={addCard}
-          />
-        </section>
-        <section>
-          <BoardForm addBoardData={addBoardData} />
-        </section>
-        <section>
-          <Card
-            cards={cardForms}
-            increment={increment}
-            decrement={decrement}
-            likesState={likesState}
-          />
-        </section>
-        <section>
-          <CardForm
-            addCardData={addCardData}
-            boards={boards}
-            setBoards={setBoards}
-            cards={cards}
-          />
-        </section>
-      </div>
-    </div>
+        <div className="App">
+          <section>
+            <Board
+              getSelectedBoard={getSelectedBoard}
+              handleChange={boardChange}
+              options={boards}
+              prompt="Select Board"
+              value={value}
+              onChange={(value) => setValue(value)}
+            />
+          </section>
+          <section>
+            <SelectedBoard
+              setSelectedBoard={setSelectedBoard}
+              board={selectedBoard}
+              selectedBoardState={selectedBoardState}
+              deleteBoard={deleteBoard}
+              addCard={addCard}
+            />
+          </section>
+          <section>
+            <BoardForm addBoardData={addBoardData} />
+          </section>
+          <section>
+            <Card
+              cards={cardForms}
+              increment={increment}
+              decrement={decrement}
+              likesState={likesState}
+            />
+          </section>
+          <section>
+            <CardForm
+              addCardData={addCardData}
+              boards={boards}
+              setBoards={setBoards}
+              cards={cards}
+            />
+          </section>
+        </div>
+      </div> */
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route
+          path="/boards"
+          element={
+            <BoardsPage
+              getSelectedBoard={getSelectedBoard}
+              handleChange={boardChange}
+              options={boards}
+              prompt="Select Board"
+              value={value}
+              onChange={(value) => setValue(value)}
+            />
+          }
+        />
+        <Route path="/cards" element={<CardsPage />} />
+        <Route element={NotFound} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

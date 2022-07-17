@@ -1,0 +1,23 @@
+.Header{
+    background-color: #02162b;
+    min-height: 20vh;
+    color: white;
+    font-family: cursive;
+}
+
+Header > nav {
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
+.links{
+    list-style-type: none;
+    width: 500px;
+    display: flex;
+    margin-left: 400px;
+    justify-content: space-evenly;
+    text-decoration: none;
+}
+
+
