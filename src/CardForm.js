@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import axios from "axios";
 
-const CardForm = ({ addCardData, boards }) => {
+const CardForm = ({ addCardData, boards, setBoards, cards }) => {
   //state of cardForm
   const [cardFormData, setCardFormData] = useState({
     message: "",
@@ -12,7 +12,7 @@ const CardForm = ({ addCardData, boards }) => {
   const onMessageChange = (e) => {
     setCardFormData({
       ...cardFormData,
-      title: e.target.value,
+      message: e.target.value,
     });
   };
 
@@ -22,19 +22,22 @@ const CardForm = ({ addCardData, boards }) => {
     addCardData({
       message: cardFormData.message,
     });
+    postCard(id);
     setCardFormData({
       message: "",
     });
-    postCard(id);
   };
 
-  const postCard = (id) => {
-    return axios.post(
+  const postCard = async (id) => {
+    const newBoard = await axios.post(
       `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`,
       {
         message: cardFormData.message,
       }
     );
+    setBoards(...boards, (cards.message = newBoard.message));
+    console.log(newBoard.message);
+    console.log(boards);
   };
 
   return (

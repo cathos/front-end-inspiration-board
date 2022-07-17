@@ -8,13 +8,14 @@ import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
 import CardForm from "./CardForm.js";
 import axios from "axios";
-
+import { Route, Routes } from "react-router-dom";
 function App() {
   //setSelected Board by id
   const getSelectedBoard = async (id) => {
     const resp = await axios.get(
       `https://orange-purple-inspo-board.herokuapp.com/boards/${id}`
     );
+    console.log(resp.data.board);
     setSelectedBoard(resp.data.board);
   };
 
@@ -201,7 +202,12 @@ function App() {
           />
         </section>
         <section>
-          <CardForm addCardData={addCardData} boards={boards} />
+          <CardForm
+            addCardData={addCardData}
+            boards={boards}
+            setBoards={setBoards}
+            cards={cards}
+          />
         </section>
       </div>
     </div>
