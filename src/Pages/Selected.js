@@ -26,13 +26,13 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
             <div className="cards">
               <div className="singleCard">
                 <div className="heart">
-                  <img
+                  {/* <img
                     className="heart-class"
                     src={Heart}
                     width={15}
                     height={15}
                     alt=""
-                  />
+                  /> */}
                 </div>
                 <p className="exit">
                   <img
@@ -44,7 +44,16 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
                   />
                 </p>
                 <h2 className="message">Message: {card.message}</h2>
-                <h2 className="likes">Likes: {card.likes_count}</h2>
+                <h2 className="likes">
+                  <img
+                    className="heart-class"
+                    src={Heart}
+                    width={50}
+                    height={50}
+                    alt=""
+                  />
+                  : {card.likes_count}
+                </h2>
               </div>
             </div>
           );
