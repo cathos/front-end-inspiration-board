@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CardsPage = ({ addCardData, boards, setBoards, cards }) => {
+const CardsPage = ({ addCardData, options, setBoards, cards, boards }) => {
+  //search query state
+  const [query, setQuery] = useState("");
+
   const [cardFormData, setCardFormData] = useState({
     message: "",
   });
@@ -33,8 +36,6 @@ const CardsPage = ({ addCardData, boards, setBoards, cards }) => {
       }
     );
     setBoards(...boards, (cards.message = newBoard.message));
-    console.log(newBoard.message);
-    console.log(boards);
   };
 
   return (
@@ -49,7 +50,30 @@ const CardsPage = ({ addCardData, boards, setBoards, cards }) => {
             onChange={onMessageChange}
           />
           <hr />
-          <input type="submit" value="Add Card" className="form-button" />
+          <input
+            type="text"
+            value={query}
+            placeholder="Search Boards"
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <hr />
+          <div className="dropdown">
+            {options
+              .filter((option) => {
+                const searchTerm = query.toLowerCase();
+                const title = option.title.toLowerCase();
+
+                return searchTerm && title.includes(searchTerm);
+              })
+              .map((option) => {
+                return (
+                  <div className="dropdown-row" key={option.id}>
+                    {option.title}
+                  </div>
+                );
+              })}
+          </div>
+          <input value="Add Card" type="submit" className="form-button" />
         </form>
       </section>
     </div>

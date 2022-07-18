@@ -253,6 +253,7 @@ function App() {
           element={
             <CardsPage
               addCardData={addCardData}
+              options={boards}
               boards={boards}
               setBoards={setBoards}
               cards={cards}
