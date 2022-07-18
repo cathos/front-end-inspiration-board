@@ -17,6 +17,7 @@ import Header from "./Components/Header";
 import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
+import Footer from "./Components/Footer";
 function App() {
   //GET cards by board Id
   const displayCards = async (id) => {
@@ -262,6 +263,7 @@ function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

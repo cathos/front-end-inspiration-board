@@ -1,20 +1,17 @@
 .App {
     background-color: #d8d5e8;
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: row;
-    align-items: left;
+    flex-flow: row;
+    /* align-items: left; */
     justify-content: space-evenly;
     font-size: calc(10px + 2vmin);
     color: white;
+    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Luckiest Guy';
 }
 
-/* .Header{
-    background-color: #02162b;
-    min-height: 20vh;
-    color: white;
-    font-family: cursive;
-} */
 
 /*BoardForm*/
 .form-inputs{

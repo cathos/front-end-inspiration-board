@@ -16,16 +16,17 @@ const CardsPage = ({ addCardData, options, setBoards, cards, boards }) => {
     });
   };
 
-  const onFormSubmit = (e, id) => {
+  const onFormSubmit = (e, id, query) => {
     e.preventDefault();
+    console.log(query);
 
-    addCardData({
-      message: cardFormData.message,
-    });
-    postCard(id);
-    setCardFormData({
-      message: "",
-    });
+    // addCardData({
+    //   message: cardFormData.message,
+    // });
+    // postCard(id);
+    // setCardFormData({
+    //   message: "",
+    // });
   };
 
   const postCard = async (id) => {

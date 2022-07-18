@@ -80,6 +80,7 @@ const BoardsPage = ({
                 }}
               >
                 Title: {option.title} By: {option.owner}
+                <hr />
               </div>
             ))}
           </div>
