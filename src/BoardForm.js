@@ -1,8 +1,10 @@
 import "./App.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 const BoardForm = ({ addBoardData }) => {
+  let navigate = useNavigate();
   const [boardFormData, setBoardFormData] = useState({
     title: "",
     owner: "",
@@ -65,7 +67,14 @@ const BoardForm = ({ addBoardData }) => {
             onChange={onOwnerChange}
           />
           <hr />
-          <input type="submit" value="Add Board" className="form-button" />
+          <input
+            type="submit"
+            value="Add Board"
+            className="form-button"
+            onClick={() => {
+              navigate("/cards");
+            }}
+          />
         </form>
       </section>
     </div>

@@ -8,7 +8,7 @@ import BoardForm from "./BoardForm.js";
 import SelectedBoard from "./SelectedBoard.js";
 import CardForm from "./CardForm.js";
 import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import About from "./Pages/about";
 import BoardsPage from "./Pages/boards";
 import Home from "./Pages/home";
@@ -16,8 +16,9 @@ import CardsPage from "./Pages/cards";
 import Header from "./Components/Header";
 import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
+import Selected from "./Pages/Selected";
 function App() {
-  //react router v6
+  //react router v6 GET Boards with useParams
 
   //setSelected Board by id
   const getSelectedBoard = async (id) => {
@@ -141,8 +142,8 @@ function App() {
     switch (action.type) {
       // case BOARD_ACTIONS.ADD_CARD:
       // return setCardFormHidden(false);
-      case BOARD_ACTIONS.DELETE_BOARD:
-        return boards.filter((form) => form.id !== action.payload.id);
+      // case BOARD_ACTIONS.DELETE_BOARD:
+      //   return boards.filter((form) => form.id !== action.payload.id);
       default:
         return selectedBoardState;
     }
@@ -214,6 +215,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        {/* dynamic route to get a board by id, when board is selected, go to new page showing boar and cards and cardform
+        user selects board & gets re-routed to card list for that board/ 
+        SelectedBoards GETS board by id then if that id matches params for /cards/:boardID, 
+        GET info for that /cards/boardID -all cards */}
+        <Route
+          path="/boards/:boardID"
+          element={
+            <Selected
+              setSelectedBoard={setSelectedBoard}
+              board={selectedBoard}
+              selectedBoardState={selectedBoardState}
+              deleteBoard={deleteBoard}
+              addCard={addCard}
+            />
+          }
+        />
         <Route
           path="/boards"
           element={
@@ -224,11 +241,12 @@ function App() {
               prompt="Select Board"
               value={value}
               onChange={(value) => setValue(value)}
+              addBoardData={addBoardData}
             />
           }
         />
         <Route path="/cards" element={<CardsPage />} />
-        <Route element={NotFound} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

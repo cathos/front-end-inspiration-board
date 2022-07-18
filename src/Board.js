@@ -12,7 +12,7 @@ const Board = ({ options, prompt, value, onChange, getSelectedBoard }) => {
           {options.map((option) => (
             <div
               key={option.id}
-              className={`${value === option} ? "selected" : null}`}
+              className={`${value === option ? "selected" : null}`}
               onClick={() => {
                 onChange(option);
                 setOpen(false);
