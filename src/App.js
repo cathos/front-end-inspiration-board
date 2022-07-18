@@ -233,7 +233,6 @@ function App() {
             />
           }
         />
-        <Route path="cards/:boardID" />
         <Route
           path="/boards"
           element={
@@ -249,7 +248,17 @@ function App() {
             />
           }
         />
-        <Route path="/cards" element={<CardsPage />} />
+        <Route
+          path="/cards"
+          element={
+            <CardsPage
+              addCardData={addCardData}
+              boards={boards}
+              setBoards={setBoards}
+              cards={cards}
+            />
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
