@@ -224,7 +224,7 @@ function App() {
           element={
             <Selected
               setSelectedBoard={setSelectedBoard}
-              board={selectedBoard}
+              boards={selectedBoard}
               selectedBoardState={selectedBoardState}
               deleteBoard={deleteBoard}
               addCard={addCard}

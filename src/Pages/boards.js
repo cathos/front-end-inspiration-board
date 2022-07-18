@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 const BoardsPage = ({
@@ -11,7 +11,7 @@ const BoardsPage = ({
   getSelectedBoard,
   addBoardData,
 }) => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [boardFormData, setBoardFormData] = useState({
     title: "",
     owner: "",
@@ -74,7 +74,7 @@ const BoardsPage = ({
                   onChange(option);
                   setOpen(false);
                   getSelectedBoard(option.id);
-                  // navigate("/boards/:boardID");
+                  navigate(`${option.id}`);
                 }}
               >
                 Title: {option.title} By: {option.owner}
