@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Heart from "../Images/heart.png";
+import Exit from "../Images/exit.png";
+import "../Styles/cards.css";
 const Selected = ({ deleteBoard, addCard, boards, cards }) => {
   // const { boardsID } = useParams();
   const removeBoard = () => {
@@ -14,15 +17,35 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
 
   return (
     <div className="App">
-      <section className="form">
+      <section>
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
         <hr />
         {cards.map((card) => {
           return (
-            <div>
-              <li>Message: {card.message}</li>
-              <li>Likes: {card.likes_count}</li>
+            <div className="cards">
+              <div className="singleCard">
+                <div className="heart">
+                  <img
+                    className="heart-class"
+                    src={Heart}
+                    width={15}
+                    height={15}
+                    alt=""
+                  />
+                </div>
+                <p className="exit">
+                  <img
+                    className="exit-class"
+                    src={Exit}
+                    width={15}
+                    height={15}
+                    alt=""
+                  />
+                </p>
+                <h2 className="message">Message: {card.message}</h2>
+                <h2 className="likes">Likes: {card.likes_count}</h2>
+              </div>
             </div>
           );
         })}
