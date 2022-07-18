@@ -25,15 +25,6 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
           return (
             <div className="cards">
               <div className="singleCard">
-                <div className="heart">
-                  {/* <img
-                    className="heart-class"
-                    src={Heart}
-                    width={15}
-                    height={15}
-                    alt=""
-                  /> */}
-                </div>
                 <p className="exit">
                   <img
                     className="exit-class"
@@ -45,13 +36,15 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
                 </p>
                 <h2 className="message">Message: {card.message}</h2>
                 <h2 className="likes">
-                  <img
-                    className="heart-class"
-                    src={Heart}
-                    width={50}
-                    height={50}
-                    alt=""
-                  />
+                  <div className="heart">
+                    <img
+                      className="heart-class"
+                      src={Heart}
+                      width={50}
+                      height={50}
+                      alt=""
+                    />
+                  </div>
                   : {card.likes_count}
                 </h2>
               </div>
