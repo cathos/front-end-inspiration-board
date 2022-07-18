@@ -18,8 +18,13 @@ import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
 function App() {
-  //react router v6 GET Boards with useParams
-
+  //GET cards by board Id
+  const displayCards = async (id) => {
+    const response = await axios.get(
+      `http://orange-purple-inspo-board.herokuapp.com/cards/${id}`
+    );
+    setCards(response.data);
+  };
   //setSelected Board by id
   const getSelectedBoard = async (id) => {
     const resp = await axios.get(
@@ -215,10 +220,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        {/* dynamic route to get a board by id, when board is selected, go to new page showing boar and cards and cardform
-        user selects board & gets re-routed to card list for that board/ 
-        SelectedBoards GETS board by id then if that id matches params for /cards/:boardID, 
-        GET info for that /cards/boardID -all cards */}
         <Route
           path="/boards/:boardID"
           element={
@@ -228,9 +229,11 @@ function App() {
               selectedBoardState={selectedBoardState}
               deleteBoard={deleteBoard}
               addCard={addCard}
+              cards={cards}
             />
           }
         />
+        <Route path="cards/:boardID" />
         <Route
           path="/boards"
           element={
@@ -242,6 +245,7 @@ function App() {
               value={value}
               onChange={(value) => setValue(value)}
               addBoardData={addBoardData}
+              displayCards={displayCards}
             />
           }
         />

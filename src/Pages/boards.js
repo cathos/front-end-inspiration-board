@@ -10,6 +10,7 @@ const BoardsPage = ({
   onChange,
   getSelectedBoard,
   addBoardData,
+  displayCards,
 }) => {
   let navigate = useNavigate();
   const [boardFormData, setBoardFormData] = useState({
@@ -74,6 +75,7 @@ const BoardsPage = ({
                   onChange(option);
                   setOpen(false);
                   getSelectedBoard(option.id);
+                  displayCards(option.id);
                   navigate(`${option.id}`);
                 }}
               >
