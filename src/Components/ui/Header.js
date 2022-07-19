@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Tea from "../Images/title_tea.png";
-import Hplant from "../Images/hanging_plant.png";
-import Plant from "../Images/plant.png";
-import Sleep from "../Images/sleeping_cat.png";
-import Books from "../Images/book-stack.png";
+import Tea from "../../Images/title_tea.png";
+// import Hplant from "../Images/hanging_plant.png";
+import Plant from "../../Images/plant.png";
+import Sleep from "../../Images/sleeping_cat.png";
+import Books from "../../Images/book-stack.png";
 import { motion } from "framer-motion/dist/framer-motion";
 
 const Header = () => {

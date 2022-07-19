@@ -8,11 +8,11 @@ import About from "./Pages/about";
 import BoardsPage from "./Pages/boards";
 import Home from "./Pages/home";
 import CardsPage from "./Pages/cards";
-import Header from "./Components/Header";
+import Header from "./Components/ui/Header";
 import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
-import Footer from "./Components/Footer";
+import Footer from "./Components/ui/Footer";
 function App() {
   //GET cards by board Id
   const displayCards = async (id) => {

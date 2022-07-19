@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Lavender from "../Images/footer_lavender.png";
+import Lavender from "../../Images/footer_lavender.png";
 
 const Footer = () => {
   return (
