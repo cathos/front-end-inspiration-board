@@ -31,10 +31,34 @@ function App() {
     const resp = await axios.get(
       `https://orange-purple-inspo-board.herokuapp.com/boards/${id}`
     );
-    console.log(resp.data.board);
     setSelectedBoard(resp.data.board);
   };
+  // const postCardToBoard = (id) => {
+  //   return axios.post(
+  //     `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`,
+  //     {
+  //       message: cardFormData.message,
+  //       likes_count: cardFormData.likes_count,
+  //     }
+  //   );
+  // };
+  // const postCardToBoard = async (id) => {
+  //   const resp = await axios.post(
+  //     `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`
+  //   );
+  //   console.log(resp.data);
+  //   // setBoards(...boards, resp.data);
+  // };
 
+  const addCardToBoard = (newCard) => {
+    const newCardData = [...cards];
+    const nextId = Math.max(...newCardData.map((card) => card.id)) + 1;
+
+    newCardData.push({
+      id: nextId,
+      likes_count: 0,
+    });
+  };
   //submit forms
   const addBoardData = (newBoard) => {
     const newBoardData = [...boards];
@@ -65,7 +89,7 @@ function App() {
   //card state
   const [cards, setCards] = useState([]);
 
-  //value
+  //value of selected board
   const [value, setValue] = useState(null);
 
   //GET request boards
@@ -258,6 +282,10 @@ function App() {
               boards={boards}
               setBoards={setBoards}
               cards={cards}
+              // postCardToBoard={postCardToBoard}
+              selectedBoard={selectedBoard}
+              clickedBoard={(value) => setValue(value)}
+              addCardToBoard={addCardToBoard}
             />
           }
         />
