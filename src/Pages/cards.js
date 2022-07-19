@@ -2,35 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/cardsdropdown.css";
 
-const CardsPage = ({
-  addCardData,
-  options,
-  setBoards,
-  cards,
-  boards,
-  getBoards,
-  // postCardToBoard,
-  clickedBoard,
-  addCardToBoard,
-}) => {
-  // const onFormSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   addCardData({
-  //     message: cardFormData.message,
-  //     board_id: board.id,
-  //   });
-  //   setCardFormData({
-  //     message: "",
-  //   });
-  //   postCardToBoard(board.id);
-  // };
+const CardsPage = ({ options, boards, addCardToBoard }) => {
   //search query state
   const [query, setQuery] = useState("");
-
   const [cardFormData, setCardFormData] = useState({
     message: "",
   });
+  const [error, setError] = useState(false);
 
   const onMessageChange = (e) => {
     setCardFormData({
@@ -39,51 +17,33 @@ const CardsPage = ({
     });
   };
 
-  // const onFormSubmit = (e, id, query) => {
-  //   e.preventDefault();
-  //   console.log(query);
-
-  // addCardData({
-  //   message: cardFormData.message,
-  // });
-  // postCard(id);
-  // setCardFormData({
-  //   message: "",
-  // });
-  // };
-
-  // const postCard = async (id) => {
-  //   const newBoard = await axios.post(
-  //     `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`,
-  //     {
-  //       message: cardFormData.message,
-  //     }
-  //   );
-  //   setBoards(...boards, (cards.message = newBoard.message));
-  // };
-
   const onChange = (e) => {
     setQuery(e.target.value);
   };
 
-  const selectOption = (searchTerm) => {
-    setQuery(searchTerm);
+  const handleError = () => {
+    setError(true);
   };
 
   const onSearch = (searchTerm) => {
-    setQuery(searchTerm);
-    boards.filter((board) => {
-      if (board.title === searchTerm) {
-        addCardToBoard({
-          message: cardFormData.message,
-          board_id: board.id,
-        });
-        postCardToBoard(board.id);
-        return board.id;
-      } else {
-        return board;
-      }
-    });
+    if (cardFormData.length === 0) {
+      handleError();
+      return;
+    } else {
+      setQuery(searchTerm);
+      boards.filter((board) => {
+        if (board.title === searchTerm) {
+          addCardToBoard({
+            message: cardFormData.message,
+            board_id: board.id,
+          });
+          postCardToBoard(board.id);
+          return board.id;
+        } else {
+          return board;
+        }
+      });
+    }
   };
 
   const postCardToBoard = (id) => {
@@ -102,8 +62,16 @@ const CardsPage = ({
         ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
         <form>
           <label>Title</label>
-          <input type="text" onChange={onMessageChange} />
+          <input
+            type="text"
+            onChange={onMessageChange}
+            placeholder="Type a message..."
+          />
+          <label>
+            {error ? <h4>Please type a message to continue</h4> : ""}
+          </label>
           <hr />
+          <label>Board</label>
           <input
             type="text"
             value={query}
@@ -111,6 +79,8 @@ const CardsPage = ({
             onChange={onChange}
           />
           <hr />
+          {error ? <h4>Please select a board to continue</h4> : ""}
+
           <div className="cards-dropdown">
             <div className="dropdown-search" type="text">
               {options
@@ -134,13 +104,7 @@ const CardsPage = ({
                 })}
             </div>
           </div>
-          <button
-          // onClick={() => onSearch(query)}
-          // type="submit"
-          // className="form-button"
-          >
-            Add Card
-          </button>
+          <button className="form-button">Add Card</button>
         </form>
       </section>
     </div>

@@ -33,22 +33,6 @@ function App() {
     );
     setSelectedBoard(resp.data.board);
   };
-  // const postCardToBoard = (id) => {
-  //   return axios.post(
-  //     `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`,
-  //     {
-  //       message: cardFormData.message,
-  //       likes_count: cardFormData.likes_count,
-  //     }
-  //   );
-  // };
-  // const postCardToBoard = async (id) => {
-  //   const resp = await axios.post(
-  //     `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`
-  //   );
-  //   console.log(resp.data);
-  //   // setBoards(...boards, resp.data);
-  // };
 
   const addCardToBoard = (newCard) => {
     const newCardData = [...cards];
