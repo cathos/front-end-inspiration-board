@@ -1,12 +1,7 @@
-import Board from "./Board.js";
 import React from "react";
 import { useState, useReducer, useEffect } from "react";
 import "./App.css";
 import "./dropdown.css";
-import Card from "./Card.js";
-import BoardForm from "./BoardForm.js";
-import SelectedBoard from "./SelectedBoard.js";
-import CardForm from "./CardForm.js";
 import axios from "axios";
 import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import About from "./Pages/about";
@@ -121,18 +116,6 @@ function App() {
     dispatch({ type: LIKE_ACTIONS.DECREMENT });
   };
 
-  //hide selected board
-  // const [selectedHidden, setSelectedHidden] = useState(true);
-  //hide CardForm
-  // const [cardFormHidden, setCardFormHidden] = useState(true);
-  //hide Card
-  // const [cardHidden, setCardHidden] = useState(true);
-
-  // const [boardForms, setBoardForms] = useState([]);
-
-  //update cardForm state and send to card to display
-  const [cardForms, setCardForms] = useState([]);
-
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
   const [selectedBoard, setSelectedBoard] = useState({
@@ -175,55 +158,6 @@ function App() {
   };
 
   return (
-    // <BrowserRouter>
-    /* <div>
-        <header className="Header">
-          <h1>♥*♡∞:｡.｡ InspoBoard ｡.｡:∞♡*♥</h1>
-          <br />
-          <button>Ψ ♥* Dark Mode .｡:†</button>
-        </header>
-
-        <div className="App">
-          <section>
-            <Board
-              getSelectedBoard={getSelectedBoard}
-              handleChange={boardChange}
-              options={boards}
-              prompt="Select Board"
-              value={value}
-              onChange={(value) => setValue(value)}
-            />
-          </section>
-          <section>
-            <SelectedBoard
-              setSelectedBoard={setSelectedBoard}
-              board={selectedBoard}
-              selectedBoardState={selectedBoardState}
-              deleteBoard={deleteBoard}
-              addCard={addCard}
-            />
-          </section>
-          <section>
-            <BoardForm addBoardData={addBoardData} />
-          </section>
-          <section>
-            <Card
-              cards={cardForms}
-              increment={increment}
-              decrement={decrement}
-              likesState={likesState}
-            />
-          </section>
-          <section>
-            <CardForm
-              addCardData={addCardData}
-              boards={boards}
-              setBoards={setBoards}
-              cards={cards}
-            />
-          </section>
-        </div>
-      </div> */
     <BrowserRouter>
       <Header />
       <Routes>

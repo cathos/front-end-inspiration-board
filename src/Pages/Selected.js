@@ -29,8 +29,8 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
                   <img
                     className="exit-class"
                     src={Exit}
-                    width={15}
-                    height={15}
+                    width={50}
+                    height={50}
                     alt=""
                   />
                 </p>
@@ -45,7 +45,7 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
                       alt=""
                     />
                   </div>
-                  : {card.likes_count}
+                  {card.likes_count}
                 </h2>
               </div>
             </div>
