@@ -13,6 +13,7 @@ import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
 import Footer from "./Components/Footer";
+
 function App() {
   //GET cards by board Id
   const displayCards = async (id) => {
@@ -111,6 +112,7 @@ function App() {
   const increment = () => {
     dispatch({ type: LIKE_ACTIONS.INCREMENT });
   };
+
   //function to decrement likesCount
   const decrement = () => {
     dispatch({ type: LIKE_ACTIONS.DECREMENT });
@@ -212,6 +214,18 @@ function App() {
       <Footer />
     </BrowserRouter>
   );
+}
+
+export function increment() {
+  return {
+    type: App.LIKE_ACTIONS.INCREMENT,
+  };
+}
+
+export function decrement() {
+  return {
+    type: App.LIKE_ACTIONS.DECREMENT,
+  };
 }
 
 export default App;

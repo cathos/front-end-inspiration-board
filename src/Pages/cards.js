@@ -56,6 +56,9 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
       }
     );
   };
+
+  const onLikeButtonClick = () => {};
+
   return (
     <div className="App">
       <section className="form">

@@ -5,6 +5,9 @@ import { useParams, Link } from "react-router-dom";
 import Heart from "../Images/heart.png";
 import Exit from "../Images/exit.png";
 import "../Styles/cards.css";
+import { useDispatch } from "react-redux";
+import { increment } from "../App";
+
 const Selected = ({ deleteBoard, addCard, boards, cards }) => {
   // const { boardsID } = useParams();
   const removeBoard = () => {
@@ -14,6 +17,8 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
   const newCard = () => {
     addCard();
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div className="App">
@@ -37,6 +42,9 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
                 <h2 className="message">Message: {card.message}</h2>
                 <h2 className="likes">
                   <div className="heart">
+                    <button onClick={() => dispatch(increment())}>
+                      <span>➕</span>
+                    </button>
                     <img
                       className="heart-class"
                       src={Heart}
