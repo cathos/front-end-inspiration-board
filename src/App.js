@@ -83,37 +83,40 @@ function App() {
     getBoards();
   }, []);
 
-  //like actions
-  const LIKE_ACTIONS = {
-    INCREMENT: "increment",
-    DECREMENT: "decrement",
-  };
-
   const BOARD_ACTIONS = {
     DELETE_BOARD: "deleteBoard",
     ADD_CARD: "addCard",
   };
 
-  //userReducer function to increment and decrement likesCount
-  const likesReducer = (likesState, action) => {
-    switch (action.type) {
-      case LIKE_ACTIONS.INCREMENT:
-        return { count: likesState.count + 1 };
-      case LIKE_ACTIONS.DECREMENT:
-        return { count: likesState.count - 1 };
-      default:
-        return likesState;
-    }
-  };
-  //increment and decrement likesCount
-  const [likesState, dispatch] = useReducer(likesReducer, { count: 0 });
-  //function to increment likesCount
-  const increment = () => {
-    dispatch({ type: LIKE_ACTIONS.INCREMENT });
-  };
-  //function to decrement likesCount
-  const decrement = () => {
-    dispatch({ type: LIKE_ACTIONS.DECREMENT });
+  //toggle card likes
+  const cardLikes = (id) => {
+    console.log(cards);
+    // const newLikedData = [...cards];
+    // const liked = newLiked(newLikedData.map(card => card.likes_count)) + 1
+    const newLikedData = cards.map((card) => {
+      if (card.id === id) {
+        if (card.likes_count === 0) {
+          return {
+            ...card,
+            likes_count: (card.likes_count = card.likes_count + 1),
+          };
+        } else if (card.likes_count === 1) {
+          return {
+            ...card,
+            likes_count: (card.likes_count = card.likes_count - 1),
+          };
+        } else {
+          return card;
+        }
+      } else {
+        return card;
+      }
+    });
+    console.log(id);
+    // console.log(likes);
+    console.log(cards);
+    console.log(newLikedData);
+    setCards(newLikedData);
   };
 
   //adds form elements to dropdown in board component
@@ -173,6 +176,11 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
+              // increment={increment}
+              // decrement={decrement}
+              // toggle={toggle}
+              // likesState={likesState}
+              cardLikes={cardLikes}
             />
           }
         />

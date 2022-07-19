@@ -5,7 +5,17 @@ import { useParams, Link } from "react-router-dom";
 import Heart from "../Images/heart.png";
 import Exit from "../Images/exit.png";
 import "../Styles/cards.css";
-const Selected = ({ deleteBoard, addCard, boards, cards }) => {
+const Selected = ({
+  deleteBoard,
+  addCard,
+  boards,
+  cards,
+  toggle,
+  likesState,
+  increment,
+  decrement,
+  cardLikes,
+}) => {
   // const { boardsID } = useParams();
   const removeBoard = () => {
     deleteBoard();
@@ -15,6 +25,13 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
     addCard();
   };
 
+  // const likeCard = (id) => {
+  //   console.log(likesState);
+  //   console.log("heart <3");
+  //   console.log(id);
+  //   toggle(id);
+  // };
+
   return (
     <div className="App">
       <section>
@@ -23,32 +40,32 @@ const Selected = ({ deleteBoard, addCard, boards, cards }) => {
         <hr />
         {cards.map((card) => {
           return (
-            <div className="cards">
-              <div className="singleCard">
-                <p className="exit">
+            // <div className="cards">
+            <div className="singleCard" key={card.id}>
+              <p className="exit">
+                <img
+                  className="exit-class"
+                  src={Exit}
+                  width={50}
+                  height={50}
+                  alt=""
+                />
+              </p>
+              <h2 className="message">Message: {card.message}</h2>
+              <h2 className="likes">
+                <div className="heart" onClick={() => cardLikes(card.id)}>
                   <img
-                    className="exit-class"
-                    src={Exit}
+                    className="heart-class"
+                    src={Heart}
                     width={50}
                     height={50}
                     alt=""
                   />
-                </p>
-                <h2 className="message">Message: {card.message}</h2>
-                <h2 className="likes">
-                  <div className="heart">
-                    <img
-                      className="heart-class"
-                      src={Heart}
-                      width={50}
-                      height={50}
-                      alt=""
-                    />
-                  </div>
-                  {card.likes_count}
-                </h2>
-              </div>
+                </div>
+                {card.likes_count}
+              </h2>
             </div>
+            // </div>
           );
         })}
         <br />
