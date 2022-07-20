@@ -4,12 +4,12 @@ import Heart from "../../Images/heart.png";
 import Exit from "../../Images/exit.png";
 import "../../Styles/cards.css";
 
-const Card = ({ id, message, likes_count, decLikes, incLikes }) => {
+const Card = ({ id, message, likes_count, minusLikes, addLikes }) => {
   const updateLikes = () => {
     if (likes_count) {
-      decLikes(id);
+      minusLikes(id);
     } else {
-      incLikes(id);
+      addLikes(id);
     }
   };
   return (
@@ -35,6 +35,7 @@ const Card = ({ id, message, likes_count, decLikes, incLikes }) => {
 };
 
 Card.propTypes = {
+  board_id: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
   likes_count: PropTypes.number.isRequired,
