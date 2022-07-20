@@ -1,20 +1,68 @@
-.footer:hover .footer-image {
+/* .footer:hover .footer-image {
     transform: translateX(100%)
 
 }
 
 .footer .footer-image {
     transition: transform 1s; 
-}
+} */
 
+
+/* InspoBoard Header Leftside Text*/
 .Header:hover .animate {
-    /* transform: translateX(100%); */
-    color: rgb(177, 181, 184)
+    color: rgb(177, 181, 184);
+    animation: blowup .5s ease-out forwards 2 alternate;
+    transform:scale(1.5);
 }
 
-.Header .animate {
-    transition: color 1s;
+
+@keyframes blowup {
+    0% {
+        transform: scale(1);
+        color: whitesmoke;
+    }
+    100% {
+        transform: scale(1.5);
+    }
 }
+/* Board Form*/
+
+.form-animate:hover .form {
+    animation: grow 1s ease-in-out both;
+    transform: scale(1.1)
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1.1)
+    }
+
+    100% {
+        transform: scale(1.1)
+    }
+}
+
+/*Footer*/
+
+.footer-image{
+    animation: back-and-forth 5s ease-in forwards infinite;
+}
+
+@keyframes back-and-forth {
+    0% {
+        transform: rotateY(360deg) translateZ(0)
+    }
+
+    33% {
+        transform: rotateY(270deg) translateZ(0)
+    }
+
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+/*Boards Page Title Pointing arrow*/
 
 .board-class:hover .board-label{
     transform: translateX(10%)
@@ -22,9 +70,16 @@
 
 .board-class .board-label{
     transition: transform .5s; 
+}
+
+/* Navigational Links*/
+
+.links:hover > span {
+    /* animation: blowup 1s ; */
+}
+
+
+
+.links > span {
 
 }
-/* 
-.links:hover{
-    background-color: rgb(159, 234, 234);
-} */

@@ -7,9 +7,15 @@
     font-family: 'Fira Sans', sans-serif;
     font-family: 'Luckiest Guy';
 }
+div > h1 {
+    min-width: fit-content;
+    /* flex-wrap: nowrap; */
+
+}
 .Header > h1 {
     padding: 10px;
     min-width: fit-content;
+
 }
 
 .animate {

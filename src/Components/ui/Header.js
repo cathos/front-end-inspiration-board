@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="Header">
       <h1 className="animate">♥ InspoBoard ♥</h1>
-      <img
+      <motion.img
         src={Tea}
         width={80}
         height={80}
@@ -21,7 +21,7 @@ const Header = () => {
         initial={{ scale: 1.5 }}
       />
       <nav className="links">
-        <img
+        <motion.img
           src={Plant}
           width={70}
           height={70}

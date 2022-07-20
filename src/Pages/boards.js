@@ -97,28 +97,30 @@ const BoardsPage = ({
           </div>
         </div>
       </div>
-      <section className="form">
-        ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
-        <form onSubmit={onFormSubmit} className="form-contents">
-          <label className="label">Title</label>
-          <input
-            type="text"
-            value={boardFormData.title}
-            onChange={onTitleChange}
-            className="input"
-            placeholder="Name your board.."
-          />
-          <label className="label">Owner</label>
-          <input
-            type="text"
-            value={boardFormData.owner}
-            onChange={onOwnerChange}
-            className="input"
-            placeholder="Who created this board?.."
-          />
-          <input type="submit" value="Add Board" className="form-button" />
-        </form>
-      </section>
+      <div className="form-animate">
+        <section className="form">
+          ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
+          <form onSubmit={onFormSubmit} className="form-contents">
+            <label className="label">Title</label>
+            <input
+              type="text"
+              value={boardFormData.title}
+              onChange={onTitleChange}
+              className="input"
+              placeholder="Name your board.."
+            />
+            <label className="label">Owner</label>
+            <input
+              type="text"
+              value={boardFormData.owner}
+              onChange={onOwnerChange}
+              className="input"
+              placeholder="Who created this board?.."
+            />
+            <input type="submit" value="Add Board" className="form-button" />
+          </form>
+        </section>
+      </div>
     </div>
   );
 };

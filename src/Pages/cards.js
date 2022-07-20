@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../Styles/animate.css";
 import "../Styles/cardsdropdown.css";
 
 const CardsPage = ({ options, boards, addCardToBoard }) => {
@@ -58,54 +59,56 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
   };
   return (
     <div className="App">
-      <section className="form">
-        ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
-        <form className="form-contents">
-          <label className="label">Title</label>
-          <input
-            type="text"
-            onChange={onMessageChange}
-            placeholder="Type a message..."
-            className="input"
-          />
-          <label>
-            {error ? <h4>Please type a message to continue</h4> : ""}
-          </label>
-          <label className="label">Board</label>
-          <input
-            type="text"
-            value={query}
-            placeholder="Search Boards"
-            onChange={onChange}
-            className="input"
-          />
-          {error ? <h4>Please select a board to continue</h4> : ""}
+      <section className="form-animate">
+        <section className="form">
+          ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
+          <form className="form-contents">
+            <label className="label">Title</label>
+            <input
+              type="text"
+              onChange={onMessageChange}
+              placeholder="Type a message..."
+              className="input"
+            />
+            <label>
+              {error ? <h4>Please type a message to continue</h4> : ""}
+            </label>
+            <label className="label">Board</label>
+            <input
+              type="text"
+              value={query}
+              placeholder="Search Boards"
+              onChange={onChange}
+              className="input"
+            />
+            {error ? <h4>Please select a board to continue</h4> : ""}
 
-          <div className="cards-dropdown">
-            <div className="dropdown-search" type="text">
-              {options
-                .filter((option) => {
-                  const searchTerm = query.toLowerCase();
-                  const title = option.title.toLowerCase();
+            <div className="cards-dropdown">
+              <div className="dropdown-search" type="text">
+                {options
+                  .filter((option) => {
+                    const searchTerm = query.toLowerCase();
+                    const title = option.title.toLowerCase();
 
-                  return searchTerm && title.includes(searchTerm);
-                })
-                .map((option) => {
-                  return (
-                    <div
-                      className="dropdown-row"
-                      key={option.id}
-                      onClick={() => onSearch(option.title)}
-                      // onClick={selectOption}
-                    >
-                      {option.title}
-                    </div>
-                  );
-                })}
+                    return searchTerm && title.includes(searchTerm);
+                  })
+                  .map((option) => {
+                    return (
+                      <div
+                        className="dropdown-row"
+                        key={option.id}
+                        onClick={() => onSearch(option.title)}
+                        // onClick={selectOption}
+                      >
+                        {option.title}
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
-          <button className="form-button">Add Card</button>
-        </form>
+            <button className="form-button">Add Card</button>
+          </form>
+        </section>
       </section>
     </div>
   );
