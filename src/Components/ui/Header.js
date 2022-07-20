@@ -21,7 +21,7 @@ const Header = () => {
         initial={{ scale: 1.5 }}
       />
       <nav className="links">
-        <motion.img
+        <img
           src={Plant}
           width={70}
           height={70}
@@ -30,12 +30,18 @@ const Header = () => {
           animate={{ y: 0 }}
         />
         <img src={Books} width={70} height={70} alt="" className="image" />
-        <Link to="/" className="link">
-          Home
-        </Link>
-        <Link to="/About">About</Link>
-        <Link to="/boards">Boards</Link>
-        <Link to="/cards">Cards</Link>
+        <span>
+          <Link to="/">Home</Link>
+        </span>
+        <span>
+          <Link to="/About">About</Link>
+        </span>
+        <span>
+          <Link to="/boards">Boards</Link>
+        </span>
+        <span>
+          <Link to="/cards">Cards</Link>
+        </span>
       </nav>
       <img src={Sleep} width={80} height={80} alt="" />
       {/* <button>Ψ ♥* Dark Mode .｡:†</button> */}
