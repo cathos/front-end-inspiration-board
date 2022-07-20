@@ -38,7 +38,7 @@ const Selected = ({
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
         <hr />
-        <section>{getCardsJSX(cards)}</section>
+        <section className="cards">{getCardsJSX(cards)}</section>
         <br />
         <div className="board-buttons">
           <button className="form-button">Remove Board</button>

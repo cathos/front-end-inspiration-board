@@ -13,31 +13,23 @@ const Card = ({ id, message, likes_count, minusLikes, addLikes, incLikes }) => {
     }
   };
   return (
-    <div className="cards">
-      <div className="singleCard">
-        <p className="exit">
+    <div className="singleCard">
+      <p className="exit">
+        <img className="exit-class" src={Exit} width={50} height={50} alt="" />
+      </p>
+      <h2 className="message">Message: {message}</h2>
+      <h2 className="likes">
+        <div className="heart" onClick={updateLikes}>
           <img
-            className="exit-class"
-            src={Exit}
+            className="heart-class"
+            src={Heart}
             width={50}
             height={50}
             alt=""
           />
-        </p>
-        <h2 className="message">Message: {message}</h2>
-        <h2 className="likes">
-          <div className="heart" onClick={updateLikes}>
-            <img
-              className="heart-class"
-              src={Heart}
-              width={50}
-              height={50}
-              alt=""
-            />
-          </div>
-          {likes_count}
-        </h2>
-      </div>
+        </div>
+        {likes_count}
+      </h2>
     </div>
   );
 };
