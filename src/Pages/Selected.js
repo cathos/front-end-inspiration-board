@@ -5,32 +5,28 @@ import { useParams, Link } from "react-router-dom";
 import Heart from "../Images/heart.png";
 import Exit from "../Images/exit.png";
 import "../Styles/cards.css";
+import Card from "../Components/ui/Card";
 const Selected = ({
   deleteBoard,
   addCard,
   boards,
+  incLikes,
+  decLikes,
   cards,
-  toggle,
-  likesState,
-  increment,
-  decrement,
-  cardLikes,
 }) => {
-  // const { boardsID } = useParams();
-  const removeBoard = () => {
-    deleteBoard();
+  const getCardsJSX = (cards) => {
+    return cards.map((card) => {
+      return (
+        <Card
+          key={card.id}
+          id={card.id}
+          message={card.message}
+          decLikes={decLikes}
+          incLikes={incLikes}
+        />
+      );
+    });
   };
-
-  const newCard = () => {
-    addCard();
-  };
-
-  // const likeCard = (id) => {
-  //   console.log(likesState);
-  //   console.log("heart <3");
-  //   console.log(id);
-  //   toggle(id);
-  // };
 
   return (
     <div className="App">
@@ -38,7 +34,8 @@ const Selected = ({
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
         <hr />
-        {cards.map((card) => {
+        <section>{getCardsJSX(cards)}</section>
+        {/* {cards.map((card) => {
           return (
             // <div className="cards">
             <div className="singleCard" key={card.id}>
@@ -53,7 +50,7 @@ const Selected = ({
               </p>
               <h2 className="message">Message: {card.message}</h2>
               <h2 className="likes">
-                <div className="heart" onClick={() => cardLikes(card.id)}>
+                <div className="heart">
                   <img
                     className="heart-class"
                     src={Heart}
@@ -64,10 +61,10 @@ const Selected = ({
                 </div>
                 {card.likes_count}
               </h2>
-            </div>
-            // </div>
-          );
-        })}
+            </div> */}
+        {/* // </div> */}
+        {/* ); */}
+        {/* })} */}
         <br />
         <div className="board-buttons">
           <button className="form-button">Remove Board</button>

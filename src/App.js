@@ -88,30 +88,84 @@ function App() {
     ADD_CARD: "addCard",
   };
 
-  //toggle card likes
-  const cardLikes = (id) => {
-    const newLikedData = cards.map((card) => {
-      if (card.id === id) {
-        if (card.likes_count === 0) {
+  //CARDS
+  const cardApiToJson = (card) => {
+    const { id, message, likes_count } = card;
+    return { id, message, likes_count };
+  };
+
+  //PATCH route to increase likes -updateAPI
+  const incLikes = async (id) => {
+    const response = await axios.patch(`cards/${id}/increase_likes_count`);
+    console.log(response.data);
+    // setCards(response.data)
+  };
+
+  //PATCH route to decrease likes -update API
+  const decLikes = async (id) => {
+    const response = await axios.patch(`cards/${id}/decrease_likes_count`);
+    console.log(response.data);
+    // setCards(response.data)
+  };
+
+  //Add likes -change state on webpage
+  const addLikes = (id) => {
+    incLikes(id).then((updatedLikesCount) => {
+      const newLikedData = cards.map((card) => {
+        if (card.id === id) {
           return {
             ...card,
-            likes_count: (card.likes_count = card.likes_count + 1),
-          };
-        } else if (card.likes_count === 1) {
-          return {
-            ...card,
-            likes_count: (card.likes_count = card.likes_count - 1),
+            likes_count: (updatedLikesCount.likes_count = card.likes_count + 1),
           };
         } else {
           return card;
         }
-      } else {
-        return card;
-      }
+      });
+      setCards(newLikedData);
     });
-    //patch route here
-    setCards(newLikedData);
   };
+
+  //Minus likes -change state on webpage
+  const minusLikes = (id) => {
+    decLikes(id).then((updatedLikesCount) => {
+      const newLikedData = cards.map((card) => {
+        if (card.id === id) {
+          return {
+            ...card,
+            likes_count: (updatedLikesCount.likes_count = card.likes_count - 1),
+          };
+        } else {
+          return card;
+        }
+      });
+      setCards(newLikedData);
+    });
+  };
+
+  //toggle card likes
+  // const cardLikes = (id) => {
+  //   const newLikedData = cards.map((card) => {
+  //     if (card.id === id) {
+  //       if (card.likes_count === 0) {
+  //         return {
+  //           ...card,
+  //           likes_count: (card.likes_count = card.likes_count + 1),
+  //         };
+  //       } else if (card.likes_count === 1) {
+  //         return {
+  //           ...card,
+  //           likes_count: (card.likes_count = card.likes_count - 1),
+  //         };
+  //       } else {
+  //         return card;
+  //       }
+  //     } else {
+  //       return card;
+  //     }
+  //   });
+  //   //patch route here
+  //   setCards(newLikedData);
+  // };
 
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
@@ -170,11 +224,8 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
-              // increment={increment}
-              // decrement={decrement}
-              // toggle={toggle}
-              // likesState={likesState}
-              cardLikes={cardLikes}
+              decLikes={decLikes}
+              incLikes={incLikes}
             />
           }
         />
