@@ -32,6 +32,8 @@
 
 
 /* InspoBoard Header Leftside Text*/
+
+
 .Header:hover .animate {
     color: rgb(177, 181, 184);
     animation: blowup .2s ease-out forwards 2 alternate;
@@ -47,7 +49,7 @@
     100% {
         transform: scale(1.1);
     }
-}
+} 
 /* Board Form*/
 
 .form-animate:hover .form {

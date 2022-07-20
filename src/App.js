@@ -135,11 +135,7 @@ function App() {
   const removeCard = (id) => {
     deleteCard(id).then((updatedCard) => {
       const newCardData = cards.filter((card) => {
-        if (card.id !== id) {
-          return true;
-        } else {
-          return card;
-        }
+        return card.id !== id;
       });
       setCards(newCardData);
     });
