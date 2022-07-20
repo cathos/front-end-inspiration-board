@@ -95,25 +95,23 @@ function App() {
   };
 
   //PATCH route to increase likes -updateAPI
-  const incLikes = async (id) => {
-    const response = await axios
-      .patch(`cards/${id}/increase_likes_count`)
+  const incLikes = (id) => {
+    return axios
+      .patch(
+        `https://orange-purple-inspo-board.herokuapp.com/cards/${id}/increase_likes_count`
+      )
       .then((response) => {
         return cardApiToJson(response.data);
       });
-    console.log(response.data);
-    // setCards(response.data)
   };
 
-  //PATCH route to decrease likes -update API
-  const decLikes = async (id) => {
-    const response = await axios
-      .patch(`cards/${id}/decrease_likes_count`)
+  //DELETE route to delete Card -update api
+  const deleteCard = (id) => {
+    return axios
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/cards/${id}`)
       .then((response) => {
         return cardApiToJson(response.data);
       });
-    console.log(response.data);
-    // setCards(response.data)
   };
 
   //Add likes -change state on webpage
@@ -133,48 +131,19 @@ function App() {
     });
   };
 
-  //Minus likes -change state on webpage
-  const minusLikes = (id) => {
-    decLikes(id).then((updatedLikesCount) => {
-      const newLikedData = cards.map((card) => {
-        if (card.id === id) {
-          return {
-            ...card,
-            likes_count: (updatedLikesCount.likes_count = card.likes_count - 1),
-          };
+  //delete card
+  const removeCard = (id) => {
+    deleteCard(id).then((updatedCard) => {
+      const newCardData = cards.filter((card) => {
+        if (card.id !== id) {
+          return true;
         } else {
           return card;
         }
       });
-      setCards(newLikedData);
+      setCards(newCardData);
     });
   };
-
-  //toggle card likes
-  // const cardLikes = (id) => {
-  //   const newLikedData = cards.map((card) => {
-  //     if (card.id === id) {
-  //       if (card.likes_count === 0) {
-  //         return {
-  //           ...card,
-  //           likes_count: (card.likes_count = card.likes_count + 1),
-  //         };
-  //       } else if (card.likes_count === 1) {
-  //         return {
-  //           ...card,
-  //           likes_count: (card.likes_count = card.likes_count - 1),
-  //         };
-  //       } else {
-  //         return card;
-  //       }
-  //     } else {
-  //       return card;
-  //     }
-  //   });
-  //   //patch route here
-  //   setCards(newLikedData);
-  // };
-
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
   const [selectedBoard, setSelectedBoard] = useState({
@@ -232,8 +201,9 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
-              minusLikes={minusLikes}
               addLikes={addLikes}
+              incLikes={incLikes}
+              removeCard={removeCard}
             />
           }
         />
@@ -261,7 +231,6 @@ function App() {
               boards={boards}
               setBoards={setBoards}
               cards={cards}
-              // postCardToBoard={postCardToBoard}
               selectedBoard={selectedBoard}
               clickedBoard={(value) => setValue(value)}
               addCardToBoard={addCardToBoard}

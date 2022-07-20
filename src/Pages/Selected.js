@@ -13,6 +13,8 @@ const Selected = ({
   minusLikes,
   addLikes,
   cards,
+  removeCard,
+  incLikes,
 }) => {
   const getCardsJSX = (cards) => {
     return cards.map((card) => {
@@ -25,6 +27,8 @@ const Selected = ({
           addLikes={addLikes}
           likes_count={card.likes_count}
           board_id={card.board_id}
+          incLikes={incLikes}
+          removeCard={removeCard}
         />
       );
     });
@@ -36,37 +40,7 @@ const Selected = ({
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
         <hr />
-        <section>{getCardsJSX(cards)}</section>
-        {/* {cards.map((card) => {
-          return (
-            // <div className="cards">
-            <div className="singleCard" key={card.id}>
-              <p className="exit">
-                <img
-                  className="exit-class"
-                  src={Exit}
-                  width={50}
-                  height={50}
-                  alt=""
-                />
-              </p>
-              <h2 className="message">Message: {card.message}</h2>
-              <h2 className="likes">
-                <div className="heart">
-                  <img
-                    className="heart-class"
-                    src={Heart}
-                    width={50}
-                    height={50}
-                    alt=""
-                  />
-                </div>
-                {card.likes_count}
-              </h2>
-            </div> */}
-        {/* // </div> */}
-        {/* ); */}
-        {/* })} */}
+        <section className="cards">{getCardsJSX(cards)}</section>
         <br />
         <div className="board-buttons">
           <button className="form-button">Remove Board</button>
