@@ -64,7 +64,7 @@ const BoardsPage = ({
       </div>
       <div className="dropdown">
         <div className="control" onClick={() => setOpen((prev) => !prev)}>
-          <div className="selected-value">{value ? value.name : prompt}</div>
+          <div className="selected-value">{value ? value.title : prompt}</div>
           <div className={`arrow ${open ? "open" : null}`} />
           <div className={`options ${open ? "open" : null}`}>
             {options.map((option) => (
@@ -80,7 +80,6 @@ const BoardsPage = ({
                 }}
               >
                 Title: {option.title} By: {option.owner}
-                <hr />
               </div>
             ))}
           </div>
@@ -88,21 +87,23 @@ const BoardsPage = ({
       </div>
       <section className="form">
         ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
-        <form onSubmit={onFormSubmit}>
-          <label>Title</label>
+        <form onSubmit={onFormSubmit} className="form-contents">
+          <label className="label">Title</label>
           <input
             type="text"
             value={boardFormData.title}
             onChange={onTitleChange}
+            className="input"
+            placeholder="Name your board.."
           />
-          <hr />
-          <label>Owner</label>
+          <label className="label">Owner</label>
           <input
             type="text"
             value={boardFormData.owner}
             onChange={onOwnerChange}
+            className="input"
+            placeholder="Who created this board?.."
           />
-          <hr />
           <input type="submit" value="Add Board" className="form-button" />
         </form>
       </section>

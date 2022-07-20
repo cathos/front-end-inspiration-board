@@ -90,9 +90,6 @@ function App() {
 
   //toggle card likes
   const cardLikes = (id) => {
-    console.log(cards);
-    // const newLikedData = [...cards];
-    // const liked = newLiked(newLikedData.map(card => card.likes_count)) + 1
     const newLikedData = cards.map((card) => {
       if (card.id === id) {
         if (card.likes_count === 0) {
@@ -112,10 +109,7 @@ function App() {
         return card;
       }
     });
-    console.log(id);
-    // console.log(likes);
-    console.log(cards);
-    console.log(newLikedData);
+    //patch route here
     setCards(newLikedData);
   };
 
