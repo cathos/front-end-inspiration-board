@@ -96,14 +96,22 @@ function App() {
 
   //PATCH route to increase likes -updateAPI
   const incLikes = async (id) => {
-    const response = await axios.patch(`cards/${id}/increase_likes_count`);
+    const response = await axios
+      .patch(`cards/${id}/increase_likes_count`)
+      .then((response) => {
+        return cardApiToJson(response.data);
+      });
     console.log(response.data);
     // setCards(response.data)
   };
 
   //PATCH route to decrease likes -update API
   const decLikes = async (id) => {
-    const response = await axios.patch(`cards/${id}/decrease_likes_count`);
+    const response = await axios
+      .patch(`cards/${id}/decrease_likes_count`)
+      .then((response) => {
+        return cardApiToJson(response.data);
+      });
     console.log(response.data);
     // setCards(response.data)
   };
