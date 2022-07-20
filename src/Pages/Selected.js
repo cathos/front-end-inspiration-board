@@ -13,6 +13,7 @@ const Selected = ({
   minusLikes,
   addLikes,
   cards,
+  removeCard,
   incLikes,
 }) => {
   const getCardsJSX = (cards) => {
@@ -27,6 +28,7 @@ const Selected = ({
           likes_count={card.likes_count}
           board_id={card.board_id}
           incLikes={incLikes}
+          removeCard={removeCard}
         />
       );
     });

@@ -105,17 +105,13 @@ function App() {
       });
   };
 
-  //PATCH route to decrease likes -update API
-  const decLikes = async (id) => {
-    const response = await axios
-      .patch(
-        `https://orange-purple-inspo-board.herokuapp.com/cards/${id}/decrease_likes_count`
-      )
+  //DELETE route to delete Card -update api
+  const deleteCard = (id) => {
+    return axios
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/cards/${id}`)
       .then((response) => {
         return cardApiToJson(response.data);
       });
-    console.log(response.data);
-    // setCards(response.data)
   };
 
   //Add likes -change state on webpage
@@ -135,23 +131,19 @@ function App() {
     });
   };
 
-  //Minus likes -change state on webpage
-  const minusLikes = (id) => {
-    decLikes(id).then((updatedLikesCount) => {
-      const newLikedData = cards.map((card) => {
-        if (card.id === id) {
-          return {
-            ...card,
-            likes_count: (updatedLikesCount.likes_count = card.likes_count - 1),
-          };
+  //delete card
+  const removeCard = (id) => {
+    deleteCard(id).then((updatedCard) => {
+      const newCardData = cards.filter((card) => {
+        if (card.id !== id) {
+          return true;
         } else {
           return card;
         }
       });
-      setCards(newLikedData);
+      setCards(newCardData);
     });
   };
-
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
   const [selectedBoard, setSelectedBoard] = useState({
@@ -209,9 +201,9 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
-              minusLikes={minusLikes}
               addLikes={addLikes}
               incLikes={incLikes}
+              removeCard={removeCard}
             />
           }
         />
@@ -239,7 +231,6 @@ function App() {
               boards={boards}
               setBoards={setBoards}
               cards={cards}
-              // postCardToBoard={postCardToBoard}
               selectedBoard={selectedBoard}
               clickedBoard={(value) => setValue(value)}
               addCardToBoard={addCardToBoard}

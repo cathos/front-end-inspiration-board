@@ -4,18 +4,33 @@ import Heart from "../../Images/heart.png";
 import Exit from "../../Images/exit.png";
 import "../../Styles/cards.css";
 import "../../Styles/animate.css";
-const Card = ({ id, message, likes_count, minusLikes, addLikes, incLikes }) => {
+const Card = ({
+  id,
+  message,
+  likes_count,
+  minusLikes,
+  addLikes,
+  incLikes,
+  removeCard,
+}) => {
   const updateLikes = () => {
-    if (likes_count) {
-      addLikes(id, likes_count);
-    } else {
-      addLikes(id);
-    }
+    addLikes(id);
+  };
+
+  const deleteCard = () => {
+    removeCard(id);
   };
   return (
     <div className="singleCard">
       <p className="exit">
-        <img className="exit-class" src={Exit} width={50} height={50} alt="" />
+        <img
+          className="exit-class"
+          src={Exit}
+          width={50}
+          height={50}
+          alt=""
+          onClick={deleteCard}
+        />
       </p>
       <h2 className="message">Message: {message}</h2>
       <h2 className="likes">
@@ -40,6 +55,7 @@ Card.propTypes = {
   message: PropTypes.string.isRequired,
   likes_count: PropTypes.number.isRequired,
   incLikes: PropTypes.func.isRequired,
+  removeCard: PropTypes.func.isRequired,
 };
 
 export default Card;
