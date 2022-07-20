@@ -224,8 +224,8 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
-              decLikes={decLikes}
-              incLikes={incLikes}
+              minusLikes={minusLikes}
+              addLikes={addLikes}
             />
           }
         />
