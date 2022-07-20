@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Heart from "../../Images/heart.png";
 import Exit from "../../Images/exit.png";
 import "../../Styles/cards.css";
-
+import "../../Styles/animate.css";
 const Card = ({ id, message, likes_count, minusLikes, addLikes, incLikes }) => {
   const updateLikes = () => {
     if (likes_count) {

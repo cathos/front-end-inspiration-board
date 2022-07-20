@@ -1,18 +1,41 @@
-/* .footer:hover .footer-image {
-    transform: translateX(100%)
+/* Cards in Selected Board*/
 
+.likes:hover .heart {
+    animation: focuscard 1s ease-in-out both;
+    transform: scale(1.1)
 }
 
-.footer .footer-image {
-    transition: transform 1s; 
-} */
+@keyframes focuscard {
+    0% {
+        transform: scale(1.1)
+    }
+
+    100% {
+        transform: scale(1.1)
+    }
+}
+
+.exit:hover .exit-class {
+    animation: focuscard 1s ease-in-out both;
+    transform: scale(1.1)
+}
+
+@keyframes focuscard {
+    0% {
+        transform: scale(1.1)
+    }
+
+    100% {
+        transform: scale(1.1)
+    }
+}
 
 
 /* InspoBoard Header Leftside Text*/
 .Header:hover .animate {
     color: rgb(177, 181, 184);
-    animation: blowup .5s ease-out forwards 2 alternate;
-    transform:scale(1.5);
+    animation: blowup .2s ease-out forwards 2 alternate;
+    transform:scale(1.1);
 }
 
 
@@ -22,7 +45,7 @@
         color: whitesmoke;
     }
     100% {
-        transform: scale(1.5);
+        transform: scale(1.1);
     }
 }
 /* Board Form*/
