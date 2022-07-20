@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
+import "../Styles/animate.css";
+import Pointer from "../Images/pointing.png";
 const BoardsPage = ({
   options,
   prompt,
@@ -59,9 +61,19 @@ const BoardsPage = ({
   const [open, setOpen] = useState(false);
   return (
     <div className="App">
-      <div>
-        <h1>InspoBoard Boards Page</h1>
+      <div className="board-class">
+        <h1 className="board-label">
+          InspoBoard Boards Page
+          <img
+            src={Pointer}
+            alt=""
+            width={50}
+            height={50}
+            className="board-label"
+          />
+        </h1>
       </div>
+
       <div className="dropdown">
         <div className="control" onClick={() => setOpen((prev) => !prev)}>
           <div className="selected-value">{value ? value.title : prompt}</div>

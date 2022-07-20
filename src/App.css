@@ -12,6 +12,10 @@
     font-family: 'Luckiest Guy';
 }
 
+.board-label {
+    margin: 10px;
+}
+
 
 
 /*BoardForm*/

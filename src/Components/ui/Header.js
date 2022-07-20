@@ -6,18 +6,13 @@ import Plant from "../../Images/plant.png";
 import Sleep from "../../Images/sleeping_cat.png";
 import Books from "../../Images/book-stack.png";
 import { motion } from "framer-motion/dist/framer-motion";
+import "../../Styles/animate.css";
 
 const Header = () => {
   return (
-    <motion.header className="Header" animate={{}}>
-      <motion.h1
-        className="animate"
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0.2 }}
-      >
-        ♥ InspoBoard ♥
-      </motion.h1>
-      <motion.img
+    <header className="Header">
+      <h1 className="animate">♥ InspoBoard ♥</h1>
+      <img
         src={Tea}
         width={80}
         height={80}
@@ -34,15 +29,17 @@ const Header = () => {
           initial={{ y: -100 }}
           animate={{ y: 0 }}
         />
-        <img src={Books} width={70} height={70} alt="" />
-        <Link to="/">Home</Link>
+        <img src={Books} width={70} height={70} alt="" className="image" />
+        <Link to="/" className="link">
+          Home
+        </Link>
         <Link to="/About">About</Link>
         <Link to="/boards">Boards</Link>
         <Link to="/cards">Cards</Link>
       </nav>
       <img src={Sleep} width={80} height={80} alt="" />
       {/* <button>Ψ ♥* Dark Mode .｡:†</button> */}
-    </motion.header>
+    </header>
   );
 };
 

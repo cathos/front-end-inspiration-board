@@ -1,0 +1,26 @@
+.footer:hover .footer-image {
+    transform: translateX(100%)
+
+}
+
+.footer .footer-image {
+    transition: transform 1s; 
+}
+
+.Header:hover .animate {
+    /* transform: translateX(100%); */
+    color: rgb(177, 181, 184)
+}
+
+.Header .animate {
+    transition: color 1s;
+}
+
+.board-class:hover .board-label{
+    transform: translateX(10%)
+}
+
+.board-class .board-label{
+    transition: transform .5s; 
+
+}
