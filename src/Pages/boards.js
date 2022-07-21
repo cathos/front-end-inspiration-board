@@ -114,7 +114,6 @@ const BoardsPage = ({
         optionsPrompt={optionsPrompt}
         boardId={boardId}
       />
-      {/* {optionsPrompt ? null : <Modal />} */}
       <div className="form-animate">
         <section className="form">
           ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
