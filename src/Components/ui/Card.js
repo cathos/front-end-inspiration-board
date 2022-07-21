@@ -4,15 +4,7 @@ import Heart from "../../Images/heart.png";
 import Exit from "../../Images/exit.png";
 import "../../Styles/cards.css";
 import "../../Styles/animate.css";
-const Card = ({
-  id,
-  message,
-  likes_count,
-  minusLikes,
-  addLikes,
-  incLikes,
-  removeCard,
-}) => {
+const Card = ({ id, message, likes_count, addLikes, removeCard }) => {
   const updateLikes = () => {
     addLikes(id);
   };

@@ -88,7 +88,9 @@ const BoardsPage = ({
 
       <div className="dropdown">
         <div className="control" onClick={() => setOpen((prev) => !prev)}>
-          <div className="selected-value">{value ? value.title : prompt}</div>
+          <div className="selected-value">
+            {value && value.owner !== "" ? value.title : prompt}
+          </div>
           <div className={`arrow ${open ? "open" : null}`} />
           <div className={`options ${open ? "open" : null}`}>
             {options.map((option) => (

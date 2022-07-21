@@ -22,12 +22,22 @@ import Footer from "./Components/ui/Footer";
 import Modal from "./Components/ui/Modal";
 
 function App() {
+  //BOARDS
+  const boardApiToJson = (board) => {
+    const { id, title, owner } = board;
+    return { id, title, owner };
+  };
+
   //Delete Board Route
   const deleteABoard = (id) => {
-    return axios.delete(
-      `http://orange-purple-inspo-board.herokuapp.com/boards/${id}`
-    );
+    return axios
+      .delete(`http://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
+      .then((response) => {
+        return boardApiToJson(response.data);
+      });
   };
+
+  const [prompt, setPrompt] = useState("Select Board...");
 
   //delete board
   const removeBoard = (id) => {
@@ -35,7 +45,10 @@ function App() {
       const newBoardData = boards.filter((board) => {
         return board.id !== id;
       });
+      console.log("i'm inside remove board");
+      console.log(`value: ${value}`);
       setBoards(newBoardData);
+      setPrompt("Select Board...");
     });
   };
   //GET cards by board Id
@@ -224,6 +237,9 @@ function App() {
               addLikes={addLikes}
               incLikes={incLikes}
               removeCard={removeCard}
+              removeBoard={removeBoard}
+              setPrompt={setPrompt}
+              value={value}
             />
           }
         />
@@ -234,7 +250,8 @@ function App() {
               getSelectedBoard={getSelectedBoard}
               handleChange={boardChange}
               options={boards}
-              prompt="Select Board"
+              // prompt="Select Board"
+              prompt={prompt}
               value={value}
               onChange={(value) => setValue(value)}
               addBoardData={addBoardData}

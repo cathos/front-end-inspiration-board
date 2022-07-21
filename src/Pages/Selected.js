@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import Heart from "../Images/heart.png";
 import Exit from "../Images/exit.png";
 import "../Styles/cards.css";
 import Card from "../Components/ui/Card";
+import { useNavigate } from "react-router-dom";
 const Selected = ({
   deleteBoard,
   addCard,
@@ -15,6 +16,9 @@ const Selected = ({
   cards,
   removeCard,
   incLikes,
+  removeBoard,
+  setPrompt,
+  value,
 }) => {
   const getCardsJSX = (cards) => {
     return cards.map((card) => {
@@ -33,6 +37,17 @@ const Selected = ({
       );
     });
   };
+  let navigate = useNavigate();
+
+  const addNav = () => {
+    navigate("/cards");
+  };
+
+  const deleteThisBoard = () => {
+    removeBoard(boards.id);
+    navigate("/boards");
+    value.owner = "";
+  };
 
   return (
     <div className="App">
@@ -43,8 +58,12 @@ const Selected = ({
         <section className="cards">{getCardsJSX(cards)}</section>
         <br />
         <div className="board-buttons">
-          <button className="form-button">Remove Board</button>
-          <button className="form-button">Add Cards</button>
+          <button className="form-button" onClick={deleteThisBoard}>
+            Remove Board
+          </button>
+          <button className="form-button" onClick={addNav}>
+            Add Cards
+          </button>
         </div>
       </section>
       <Link to="/boards">Boards Home</Link>
