@@ -103,7 +103,6 @@ const BoardsPage = ({
                   getSelectedBoard(option.id);
                   displayCards(option.id);
                   openModal(option.id);
-                  // navigate(`${option.id}`);
                 }}
               >
                 Title: {option.title} By: {option.owner}

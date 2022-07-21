@@ -24,7 +24,7 @@ function App() {
   //Delete Board Route
   const deleteABoard = (id) => {
     return axios
-      .delete(`http://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
       .then((response) => {
         return boardApiToJson(response.data);
       });
@@ -47,7 +47,7 @@ function App() {
   //GET cards by board Id
   const displayCards = async (id) => {
     const response = await axios.get(
-      `http://orange-purple-inspo-board.herokuapp.com/cards/${id}`
+      `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`
     );
     setCards(response.data);
   };
