@@ -14,6 +14,7 @@ const BoardsPage = ({
   getSelectedBoard,
   addBoardData,
   displayCards,
+  removeBoard,
 }) => {
   //after you click on board, open modal to show options
 
@@ -113,6 +114,7 @@ const BoardsPage = ({
         setOptionsPrompt={setOptionsPrompt}
         optionsPrompt={optionsPrompt}
         boardId={boardId}
+        removeBoard={removeBoard}
       />
       <div className="form-animate">
         <section className="form">

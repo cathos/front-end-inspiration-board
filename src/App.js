@@ -22,6 +22,22 @@ import Footer from "./Components/ui/Footer";
 import Modal from "./Components/ui/Modal";
 
 function App() {
+  //Delete Board Route
+  const deleteABoard = (id) => {
+    return axios.delete(
+      `http://orange-purple-inspo-board.herokuapp.com/boards/${id}`
+    );
+  };
+
+  //delete board
+  const removeBoard = (id) => {
+    deleteABoard(id).then((updatedBoard) => {
+      const newBoardData = boards.filter((board) => {
+        return board.id !== id;
+      });
+      setBoards(newBoardData);
+    });
+  };
   //GET cards by board Id
   const displayCards = async (id) => {
     const response = await axios.get(
@@ -223,6 +239,7 @@ function App() {
               onChange={(value) => setValue(value)}
               addBoardData={addBoardData}
               displayCards={displayCards}
+              removeBoard={removeBoard}
             />
           }
         />

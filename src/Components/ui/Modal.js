@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/modal.css";
 
-export default function Modal({ setOptionsPrompt, optionsPrompt, boardId }) {
+export default function Modal({
+  setOptionsPrompt,
+  optionsPrompt,
+  boardId,
+  removeBoard,
+}) {
   let navigate = useNavigate();
 
   const viewBoard = () => {
     navigate(`${boardId}`);
+  };
+
+  const deleteBoard = () => {
+    removeBoard(boardId);
   };
 
   if (!optionsPrompt) return null;
@@ -21,7 +30,7 @@ export default function Modal({ setOptionsPrompt, optionsPrompt, boardId }) {
             Select Another Board
           </button>
           <button onClick={viewBoard}>View boards</button>
-          <button>Delete This Board</button>
+          <button onClick={deleteBoard}>Delete This Board</button>
           <div className="modal-footer"></div>
         </div>
       </div>
