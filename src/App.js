@@ -1,15 +1,9 @@
 import React from "react";
-import { useState, useReducer, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import "./dropdown.css";
 import axios from "axios";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useParams,
-  prompt,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./Pages/about";
 import BoardsPage from "./Pages/boards";
 import Home from "./Pages/home";
@@ -19,7 +13,6 @@ import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
 import Footer from "./Components/ui/Footer";
-import Modal from "./Components/ui/Modal";
 
 function App() {
   //BOARDS
@@ -31,7 +24,7 @@ function App() {
   //Delete Board Route
   const deleteABoard = (id) => {
     return axios
-      .delete(`http://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
       .then((response) => {
         return boardApiToJson(response.data);
       });
@@ -54,7 +47,7 @@ function App() {
   //GET cards by board Id
   const displayCards = async (id) => {
     const response = await axios.get(
-      `http://orange-purple-inspo-board.herokuapp.com/cards/${id}`
+      `https://orange-purple-inspo-board.herokuapp.com/cards/${id}`
     );
     setCards(response.data);
   };
@@ -119,11 +112,6 @@ function App() {
   useEffect(() => {
     getBoards();
   }, []);
-
-  const BOARD_ACTIONS = {
-    DELETE_BOARD: "deleteBoard",
-    ADD_CARD: "addCard",
-  };
 
   //CARDS
   const cardApiToJson = (card) => {
@@ -192,32 +180,6 @@ function App() {
     }
   };
 
-  //Board actions with useReducer
-  //selectedBooards actions
-  //delete board
-  //add card
-  const boardReducer = (selectedBoardState, action) => {
-    switch (action.type) {
-      // case BOARD_ACTIONS.ADD_CARD:
-      // return setCardFormHidden(false);
-      // case BOARD_ACTIONS.DELETE_BOARD:
-      //   return boards.filter((form) => form.id !== action.payload.id);
-      default:
-        return selectedBoardState;
-    }
-  };
-  const [selectedBoardState, selectedBoardDispatch] = useReducer(
-    boardReducer,
-    []
-  );
-  const deleteBoard = () => {
-    selectedBoardDispatch({ type: BOARD_ACTIONS.DELETE_BOARD });
-  };
-
-  const addCard = () => {
-    selectedBoardDispatch({ type: BOARD_ACTIONS.ADD_CARD });
-  };
-
   return (
     <BrowserRouter>
       <Header />
@@ -230,9 +192,6 @@ function App() {
             <Selected
               setSelectedBoard={setSelectedBoard}
               boards={selectedBoard}
-              selectedBoardState={selectedBoardState}
-              deleteBoard={deleteBoard}
-              addCard={addCard}
               cards={cards}
               addLikes={addLikes}
               incLikes={incLikes}
