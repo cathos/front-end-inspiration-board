@@ -3,7 +3,13 @@ import { useState, useReducer, useEffect } from "react";
 import "./App.css";
 import "./dropdown.css";
 import axios from "axios";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useParams,
+  prompt,
+} from "react-router-dom";
 import About from "./Pages/about";
 import BoardsPage from "./Pages/boards";
 import Home from "./Pages/home";
@@ -13,7 +19,25 @@ import "./Styles/header.css";
 import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
 import Footer from "./Components/ui/Footer";
+import Modal from "./Components/ui/Modal";
+
 function App() {
+  //Delete Board Route
+  const deleteABoard = (id) => {
+    return axios.delete(
+      `http://orange-purple-inspo-board.herokuapp.com/boards/${id}`
+    );
+  };
+
+  //delete board
+  const removeBoard = (id) => {
+    deleteABoard(id).then((updatedBoard) => {
+      const newBoardData = boards.filter((board) => {
+        return board.id !== id;
+      });
+      setBoards(newBoardData);
+    });
+  };
   //GET cards by board Id
   const displayCards = async (id) => {
     const response = await axios.get(
@@ -215,6 +239,7 @@ function App() {
               onChange={(value) => setValue(value)}
               addBoardData={addBoardData}
               displayCards={displayCards}
+              removeBoard={removeBoard}
             />
           }
         />
