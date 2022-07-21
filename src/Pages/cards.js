@@ -9,7 +9,6 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
   const [cardFormData, setCardFormData] = useState({
     message: "",
   });
-  const [error, setError] = useState(false);
 
   const onMessageChange = (e) => {
     setCardFormData({
@@ -22,29 +21,20 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
     setQuery(e.target.value);
   };
 
-  const handleError = () => {
-    setError(true);
-  };
-
   const onSearch = (searchTerm) => {
-    if (cardFormData.length === 0) {
-      handleError();
-      return;
-    } else {
-      setQuery(searchTerm);
-      boards.filter((board) => {
-        if (board.title === searchTerm) {
-          addCardToBoard({
-            message: cardFormData.message,
-            board_id: board.id,
-          });
-          postCardToBoard(board.id);
-          return board.id;
-        } else {
-          return board;
-        }
-      });
-    }
+    setQuery(searchTerm);
+    boards.filter((board) => {
+      if (board.title === searchTerm) {
+        addCardToBoard({
+          message: cardFormData.message,
+          board_id: board.id,
+        });
+        postCardToBoard(board.id);
+        return board.id;
+      } else {
+        return board;
+      }
+    });
   };
 
   const postCardToBoard = (id) => {
@@ -70,9 +60,6 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
               placeholder="Type a message..."
               className="input"
             />
-            <label>
-              {error ? <h4>Please type a message to continue</h4> : ""}
-            </label>
             <label className="label">Board</label>
             <input
               type="text"
@@ -81,7 +68,6 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
               onChange={onChange}
               className="input"
             />
-            {error ? <h4>Please select a board to continue</h4> : ""}
 
             <div className="cards-dropdown">
               <div className="dropdown-search" type="text">

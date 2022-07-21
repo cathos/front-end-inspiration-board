@@ -5,6 +5,7 @@ import axios from "axios";
 import "../App.css";
 import "../Styles/animate.css";
 import Pointer from "../Images/pointing.png";
+import Modal from "../Components/ui/Modal";
 const BoardsPage = ({
   options,
   prompt,
@@ -14,7 +15,17 @@ const BoardsPage = ({
   addBoardData,
   displayCards,
 }) => {
-  let navigate = useNavigate();
+  //after you click on board, open modal to show options
+
+  const [optionsPrompt, setOptionsPrompt] = useState(false);
+  const [boardId, setBoardId] = useState([]);
+
+  const openModal = (id) => {
+    setBoardId(id);
+    setOptionsPrompt(true);
+    // navigate(`${options.id}/options`);
+  };
+  // let navigate = useNavigate();
   const [boardFormData, setBoardFormData] = useState({
     title: "",
     owner: "",
@@ -88,7 +99,8 @@ const BoardsPage = ({
                   setOpen(false);
                   getSelectedBoard(option.id);
                   displayCards(option.id);
-                  navigate(`${option.id}`);
+                  openModal(option.id);
+                  // navigate(`${option.id}`);
                 }}
               >
                 Title: {option.title} By: {option.owner}
@@ -97,6 +109,12 @@ const BoardsPage = ({
           </div>
         </div>
       </div>
+      <Modal
+        setOptionsPrompt={setOptionsPrompt}
+        optionsPrompt={optionsPrompt}
+        boardId={boardId}
+      />
+      {/* {optionsPrompt ? null : <Modal />} */}
       <div className="form-animate">
         <section className="form">
           ⁺ 𓂋 𓈒 ♡Create Board ⁺ 𓂋 𓈒 ♡
