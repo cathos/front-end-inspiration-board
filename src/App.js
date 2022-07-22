@@ -106,6 +106,7 @@ function App() {
     const response = await axios.get(
       "https://orange-purple-inspo-board.herokuapp.com/boards"
     );
+    console.log("boards and such");
     setBoards(response.data);
   };
 
