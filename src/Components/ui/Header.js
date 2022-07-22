@@ -23,14 +23,7 @@ const Header = () => {
         initial={{ scale: 1 }}
       />
       <nav className="links">
-        <motion.img
-          src={Plant}
-          width={70}
-          height={70}
-          alt=""
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-        />
+        <motion.img src={Plant} width={70} height={70} alt="" />
         <img src={Books} width={70} height={70} alt="" className="image" />
         <motion.span whileHover={{ scale: 1.1 }} initial={{ scale: 1 }}>
           <Link to="/" className="link-button">

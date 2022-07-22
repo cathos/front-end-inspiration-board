@@ -55,7 +55,14 @@ const Selected = ({
       <section>
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
-        <section className="cards">{getCardsJSX(cards)}</section>
+        <motion.section
+          className="cards"
+          initial={{ opacity: 0, translateX: -50 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {getCardsJSX(cards)}
+        </motion.section>
         <br />
         <div className="board-buttons">
           <button className="form-button" onClick={deleteThisBoard}>
