@@ -14,6 +14,11 @@ import NotFound from "./Pages/NotFound";
 import Selected from "./Pages/Selected";
 import Footer from "./Components/ui/Footer";
 function App() {
+  //BOARDS
+  const boardApiToJson = (board) => {
+    const { id, title, owner } = board;
+    return { id, title, owner };
+  };
   //GET cards by board Id
   const displayCards = async (id) => {
     const response = await axios.get(
@@ -83,9 +88,26 @@ function App() {
     getBoards();
   }, []);
 
-  const BOARD_ACTIONS = {
-    DELETE_BOARD: "deleteBoard",
-    ADD_CARD: "addCard",
+  //Delete Board Route
+  const deleteABoard = (id) => {
+    return axios
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/boards/${id}`)
+      .then((response) => {
+        return boardApiToJson(response.data);
+      });
+  };
+
+  //delete board
+  const removeBoard = (id) => {
+    deleteABoard(id).then(() => {
+      const newBoardData = boards.filter((board) => {
+        return board.id !== id;
+      });
+      console.log("i'm inside remove board");
+      console.log(`value: ${value}`);
+      setBoards(newBoardData);
+      getBoards();
+    });
   };
 
   //CARDS
@@ -171,6 +193,8 @@ function App() {
               addLikes={addLikes}
               deleteCard={deleteCard}
               removeCard={removeCard}
+              removeBoard={removeBoard}
+              value={value}
             />
           }
         />
@@ -186,6 +210,8 @@ function App() {
               onChange={(value) => setValue(value)}
               addBoardData={addBoardData}
               displayCards={displayCards}
+              removeBoard={removeBoard}
+              getBoards={getBoards}
             />
           }
         />

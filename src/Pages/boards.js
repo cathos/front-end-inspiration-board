@@ -18,6 +18,7 @@ const BoardsPage = ({
   addBoardData,
   displayCards,
   removeBoard,
+  getBoards,
 }) => {
   //after you click on board, open modal to show options
 
@@ -64,13 +65,14 @@ const BoardsPage = ({
   };
 
   const postBoard = () => {
-    return axios.post(
-      "https://orange-purple-inspo-board.herokuapp.com/boards",
-      {
+    return axios
+      .post("https://orange-purple-inspo-board.herokuapp.com/boards", {
         title: boardFormData.title,
         owner: boardFormData.owner,
-      }
-    );
+      })
+      .then(() => {
+        getBoards();
+      });
   };
 
   const [open, setOpen] = useState(false);
