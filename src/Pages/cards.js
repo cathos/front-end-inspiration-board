@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/animate.css";
 import "../Styles/cardsdropdown.css";
+import Candle from "../Images/candle.png";
+import Incense from "../Images/incense.png";
 
 const CardsPage = ({ options, boards, addCardToBoard }) => {
   //search query state
@@ -50,6 +52,8 @@ const CardsPage = ({ options, boards, addCardToBoard }) => {
   return (
     <div className="App">
       <section className="form-animate">
+        <img src={Candle} alt="" width={80} height={80} />
+        <img src={Incense} alt="" width={80} height={80} />
         <section className="form">
           ꒰ა ♡ ໒꒱ Create Card ✧･ﾟ: *✧･ﾟ:* 𓆩♡𓆪
           <form className="form-contents">

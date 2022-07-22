@@ -7,6 +7,8 @@ import Sleep from "../../Images/sleeping_cat.png";
 import Books from "../../Images/book-stack.png";
 import { motion } from "framer-motion/dist/framer-motion";
 import "../../Styles/animate.css";
+import "../../Styles/header.css";
+import "../../Styles/cards.css";
 
 const Header = () => {
   return (
@@ -17,8 +19,8 @@ const Header = () => {
         width={80}
         height={80}
         alt=""
-        animate={{ scale: 1 }}
-        initial={{ scale: 1.5 }}
+        whileHover={{ scale: 1.5 }}
+        initial={{ scale: 1 }}
       />
       <nav className="links">
         <motion.img
@@ -30,21 +32,28 @@ const Header = () => {
           animate={{ y: 0 }}
         />
         <img src={Books} width={70} height={70} alt="" className="image" />
-        <span>
-          <Link to="/">Home</Link>
-        </span>
-        <span>
-          <Link to="/About">About</Link>
-        </span>
-        <span>
-          <Link to="/boards">Boards</Link>
-        </span>
-        <span>
-          <Link to="/cards">Cards</Link>
-        </span>
+        <motion.span whileHover={{ scale: 1.1 }} initial={{ scale: 1 }}>
+          <Link to="/" className="link-button">
+            Home
+          </Link>
+        </motion.span>
+        <motion.span whileHover={{ scale: 1.1 }} initial={{ scale: 1 }}>
+          <Link to="/About" className="link-button">
+            About
+          </Link>
+        </motion.span>
+        <motion.span whileHover={{ scale: 1.1 }} initial={{ scale: 1 }}>
+          <Link to="/boards" className="link-button">
+            Boards
+          </Link>
+        </motion.span>
+        <motion.span whileHover={{ scale: 1.1 }} initial={{ scale: 1 }}>
+          <Link to="/cards" className="link-button">
+            Cards
+          </Link>
+        </motion.span>
       </nav>
       <img src={Sleep} width={80} height={80} alt="" />
-      {/* <button>Ψ ♥* Dark Mode .｡:†</button> */}
     </header>
   );
 };
