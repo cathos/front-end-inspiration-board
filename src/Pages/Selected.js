@@ -7,6 +7,7 @@ import Exit from "../Images/exit.png";
 import "../Styles/cards.css";
 import Card from "../Components/ui/Card";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion/dist/framer-motion";
 const Selected = ({
   deleteBoard,
   addCard,
@@ -54,8 +55,14 @@ const Selected = ({
       <section>
         <h4>Selected Board</h4>
         <div>{`Title: ${boards.title} By: ${boards.owner}`}</div>
-        <hr />
-        <section className="cards">{getCardsJSX(cards)}</section>
+        <motion.section
+          className="cards"
+          initial={{ opacity: 0, translateX: -50 }}
+          animate={{ opacity: 1, translateX: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {getCardsJSX(cards)}
+        </motion.section>
         <br />
         <div className="board-buttons">
           <button className="form-button" onClick={deleteThisBoard}>
@@ -66,7 +73,16 @@ const Selected = ({
           </button>
         </div>
       </section>
-      <Link to="/boards">Boards Home</Link>
+      <motion.span
+        animate={{ x: -80, scale: 1 }}
+        initial={{ x: -30, scale: 1.2 }}
+        whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
+        transition={{ duration: 1 }}
+      >
+        <Link to="/boards" className="link-button">
+          Boards Home
+        </Link>
+      </motion.span>
     </div>
   );
 };

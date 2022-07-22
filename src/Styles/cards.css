@@ -13,7 +13,6 @@
     margin: 20px;
     padding: 20px;
     width: 300px; 
-    /* max-width: max-content; */
     max-height: 200px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.2s; 
@@ -27,7 +26,6 @@
 .exit {
     grid-row: 1/2;
     grid-column: 4/4;
-    /* justify-self: end; */
 }
 
 .message {
@@ -40,7 +38,6 @@
 .likes {
     grid-row: 3;
     grid-column: 1;
-    /* font-weight: 400; */
     color: #ffffff;
 }
 
@@ -49,7 +46,15 @@ div > h2 {
    flex: 1;
 }
 
-/* @media (max-width: 1600px) {
-    .cards {
-    justify-content: center;
-} */
+
+.link-button {
+    background-color: #76b2fe;
+   padding: 8px;
+   border-radius: 8px;
+   text-decoration: wavy;
+   color: #fff;
+   cursor: pointer;
+   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+   background: radial-gradient(#6ab6f3, #8bcce5);
+   margin: 2px;
+}

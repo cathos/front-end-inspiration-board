@@ -97,18 +97,6 @@
     transition: transform .5s; 
 }
 
-/* Navigational Links*/
-
-.links:hover > span {
-    /* animation: blowup 1s ; */
-}
-
-
-
-.links > span {
-
-}
-
 /*Home Page Text*/
 
 .home-text{

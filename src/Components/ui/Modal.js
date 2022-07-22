@@ -24,22 +24,20 @@ export default function Modal({
     <section className="modal-container">
       <div className="modal-header">
         <p>Select Option</p>
+
         {/* <span className="close-modal">x</span> */}
         <div className="modal-body">
-          <button onClick={viewBoard} className="view-button">
-            View board
-          </button>
           <button
             onClick={() => setOptionsPrompt(false)}
             className="next-button"
           >
-            X
+            Next
           </button>
-          {/* <button onClick={viewBoard} className="view-button">
+          <button onClick={viewBoard} className="view-button">
             View board
-          </button> */}
+          </button>
           <button onClick={deleteBoard} className="delete-button">
-            Delete This Board
+            Delete Board
           </button>
           <div className="modal-footer"></div>
         </div>

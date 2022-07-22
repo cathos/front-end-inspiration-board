@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 import "../Styles/animate.css";
 import Pointer from "../Images/pointing.png";
 import Modal from "../Components/ui/Modal";
+import Pistachios from "../Images/pistachio.png";
+import Lamp from "../Images/table-lamp.png";
+import Airpods from "../Images/airpods.png";
+import Pen from "../Images/pen.png";
 const BoardsPage = ({
   options,
   prompt,
@@ -73,6 +76,7 @@ const BoardsPage = ({
   const [open, setOpen] = useState(false);
   return (
     <div className="App">
+      <img src={Airpods} alt="" width={80} height={80} />
       <div className="board-class">
         <h1 className="board-label">
           InspoBoard Boards Page
@@ -109,6 +113,7 @@ const BoardsPage = ({
               </div>
             ))}
           </div>
+          <img src={Lamp} alt="" width={80} height={80} className="lamp" />
         </div>
       </div>
       <Modal
@@ -140,6 +145,10 @@ const BoardsPage = ({
             <input type="submit" value="Add Board" className="form-button" />
           </form>
         </section>
+      </div>
+      <div>
+        <img src={Pistachios} alt="" width={80} height={80} />
+        <img src={Pen} alt="" width={80} height={80} />
       </div>
     </div>
   );
