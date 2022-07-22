@@ -70,7 +70,7 @@
 /*Footer*/
 
 .footer-image{
-    animation: back-and-forth 5s ease-in forwards infinite;
+    animation: back-and-forth 40s ease-in forwards infinite;
 }
 
 @keyframes back-and-forth {
