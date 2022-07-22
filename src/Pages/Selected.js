@@ -16,9 +16,9 @@ const Selected = ({
   addLikes,
   cards,
   removeCard,
-  incLikes,
   removeBoard,
   setPrompt,
+  deleteCard,
   value,
 }) => {
   const getCardsJSX = (cards) => {
@@ -32,8 +32,7 @@ const Selected = ({
           addLikes={addLikes}
           likes_count={card.likes_count}
           board_id={card.board_id}
-          incLikes={incLikes}
-          removeCard={removeCard}
+          deleteCard={deleteCard}
         />
       );
     });

@@ -97,7 +97,9 @@ function App() {
   //PATCH route to increase likes -updateAPI
   const incLikes = async (id) => {
     const response = await axios
-      .patch(`cards/${id}/increase_likes_count`)
+      .patch(
+        `https://orange-purple-inspo-board.herokuapp.com/cards/${id}/increase_likes_count`
+      )
       .then((response) => {
         return cardApiToJson(response.data);
       });
@@ -108,7 +110,9 @@ function App() {
   //PATCH route to decrease likes -update API
   const decLikes = async (id) => {
     const response = await axios
-      .patch(`cards/${id}/decrease_likes_count`)
+      .patch(
+        `https://orange-purple-inspo-board.herokuapp.com/cards/${id}/decrease_likes_count`
+      )
       .then((response) => {
         return cardApiToJson(response.data);
       });
@@ -132,22 +136,13 @@ function App() {
       setCards(newLikedData);
     });
   };
-
-  //Minus likes -change state on webpage
-  const minusLikes = (id) => {
-    decLikes(id).then((updatedLikesCount) => {
-      const newLikedData = cards.map((card) => {
-        if (card.id === id) {
-          return {
-            ...card,
-            likes_count: (updatedLikesCount.likes_count = card.likes_count - 1),
-          };
-        } else {
-          return card;
-        }
+  //DELETE route to delete Card -update api
+  const deleteCard = (id) => {
+    return axios
+      .delete(`https://orange-purple-inspo-board.herokuapp.com/cards/${id}`)
+      .then((response) => {
+        return cardApiToJson(response.data);
       });
-      setCards(newLikedData);
-    });
   };
 
   //toggle card likes
@@ -232,8 +227,8 @@ function App() {
               deleteBoard={deleteBoard}
               addCard={addCard}
               cards={cards}
-              minusLikes={minusLikes}
               addLikes={addLikes}
+              deleteCard={deleteCard}
             />
           }
         />
@@ -274,6 +269,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
