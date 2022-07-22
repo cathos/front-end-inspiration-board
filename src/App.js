@@ -69,7 +69,7 @@ function App() {
   };
   //boards state
   const [boards, setBoards] = useState([]);
-
+ 
   //card state
   const [cards, setCards] = useState([]);
 
@@ -99,15 +99,16 @@ function App() {
 
   //delete board
   const removeBoard = (id) => {
-    deleteABoard(id).then(() => {
-      const newBoardData = boards.filter((board) => {
-        return board.id !== id;
-      });
-      console.log("i'm inside remove board");
-      console.log(`value: ${value}`);
-      setBoards(newBoardData);
-      getBoards();
-    });
+    // return deleteABoard(id).then(() => {
+    //   const newBoardData = boards.filter((board) => {
+    //     return board.id !== id;
+    //   });
+    //   console.log("i'm inside remove board");
+    //   console.log(`value: ${value}`);
+    //   setBoards(newBoardData);
+    //   return getBoards();
+    // });
+    return deleteABoard(id).then(getBoards).then(()=>{setValue(null);});
   };
 
   //CARDS

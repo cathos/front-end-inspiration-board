@@ -15,7 +15,8 @@ export default function Modal({
   };
 
   const deleteBoard = () => {
-    removeBoard(boardId);
+    console.log(boardId)
+    removeBoard(boardId).then(() => {setOptionsPrompt(false);});
   };
 
   if (!optionsPrompt) return null;
