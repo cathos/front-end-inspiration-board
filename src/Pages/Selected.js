@@ -33,6 +33,7 @@ const Selected = ({
           likes_count={card.likes_count}
           board_id={card.board_id}
           deleteCard={deleteCard}
+          removeCard={removeCard}
         />
       );
     });

@@ -103,31 +103,16 @@ function App() {
       .then((response) => {
         return cardApiToJson(response.data);
       });
-    console.log(response.data);
-    // setCards(response.data)
-  };
-
-  //PATCH route to decrease likes -update API
-  const decLikes = async (id) => {
-    const response = await axios
-      .patch(
-        `https://orange-purple-inspo-board.herokuapp.com/cards/${id}/decrease_likes_count`
-      )
-      .then((response) => {
-        return cardApiToJson(response.data);
-      });
-    console.log(response.data);
-    // setCards(response.data)
   };
 
   //Add likes -change state on webpage
   const addLikes = (id) => {
-    incLikes(id).then((updatedLikesCount) => {
+    incLikes(id).then(() => {
       const newLikedData = cards.map((card) => {
         if (card.id === id) {
           return {
             ...card,
-            likes_count: (updatedLikesCount.likes_count = card.likes_count + 1),
+            likes_count: (card.likes_count = card.likes_count + 1),
           };
         } else {
           return card;
@@ -145,30 +130,15 @@ function App() {
       });
   };
 
-  //toggle card likes
-  // const cardLikes = (id) => {
-  //   const newLikedData = cards.map((card) => {
-  //     if (card.id === id) {
-  //       if (card.likes_count === 0) {
-  //         return {
-  //           ...card,
-  //           likes_count: (card.likes_count = card.likes_count + 1),
-  //         };
-  //       } else if (card.likes_count === 1) {
-  //         return {
-  //           ...card,
-  //           likes_count: (card.likes_count = card.likes_count - 1),
-  //         };
-  //       } else {
-  //         return card;
-  //       }
-  //     } else {
-  //       return card;
-  //     }
-  //   });
-  //   //patch route here
-  //   setCards(newLikedData);
-  // };
+  //delete card
+  const removeCard = (id) => {
+    deleteCard(id).then((updatedCard) => {
+      const newCardData = cards.filter((card) => {
+        return card.id !== id;
+      });
+      setCards(newCardData);
+    });
+  };
 
   //adds form elements to dropdown in board component
   //send this state to SelectedBoard
@@ -185,32 +155,6 @@ function App() {
     }
   };
 
-  //Board actions with useReducer
-  //selectedBooards actions
-  //delete board
-  //add card
-  const boardReducer = (selectedBoardState, action) => {
-    switch (action.type) {
-      // case BOARD_ACTIONS.ADD_CARD:
-      // return setCardFormHidden(false);
-      // case BOARD_ACTIONS.DELETE_BOARD:
-      //   return boards.filter((form) => form.id !== action.payload.id);
-      default:
-        return selectedBoardState;
-    }
-  };
-  const [selectedBoardState, selectedBoardDispatch] = useReducer(
-    boardReducer,
-    []
-  );
-  const deleteBoard = () => {
-    selectedBoardDispatch({ type: BOARD_ACTIONS.DELETE_BOARD });
-  };
-
-  const addCard = () => {
-    selectedBoardDispatch({ type: BOARD_ACTIONS.ADD_CARD });
-  };
-
   return (
     <BrowserRouter>
       <Header />
@@ -223,12 +167,10 @@ function App() {
             <Selected
               setSelectedBoard={setSelectedBoard}
               boards={selectedBoard}
-              selectedBoardState={selectedBoardState}
-              deleteBoard={deleteBoard}
-              addCard={addCard}
               cards={cards}
               addLikes={addLikes}
               deleteCard={deleteCard}
+              removeCard={removeCard}
             />
           }
         />

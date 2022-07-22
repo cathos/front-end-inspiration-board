@@ -4,13 +4,13 @@ import Heart from "../../Images/heart.png";
 import Exit from "../../Images/exit.png";
 import "../../Styles/cards.css";
 import "../../Styles/animate.css";
-const Card = ({ id, message, likes_count, addLikes, deleteCard }) => {
+const Card = ({ id, message, likes_count, addLikes, removeCard }) => {
   const updateLikes = () => {
     addLikes(id);
   };
 
-  const removeCard = () => {
-    deleteCard(id);
+  const deleteCard = () => {
+    removeCard(id);
   };
   return (
     <div className="singleCard">
@@ -21,7 +21,7 @@ const Card = ({ id, message, likes_count, addLikes, deleteCard }) => {
           width={50}
           height={50}
           alt=""
-          onClick={removeCard}
+          onClick={deleteCard}
         />
       </p>
       <h2 className="message">Message: {message}</h2>
@@ -46,7 +46,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
   likes_count: PropTypes.number.isRequired,
-  deleteCard: PropTypes.func.isRequired,
+  removeCard: PropTypes.func.isRequired,
   addLikes: PropTypes.func.isRequired,
 };
 
